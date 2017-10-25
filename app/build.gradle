@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "io.github.hidroh.calendar"
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    lintOptions {
+        htmlReport false
+        xmlReport false
+        textReport true
+        warningsAsErrors true
+        abortOnError true
+        explainIssues false
+        absolutePaths false
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            exceptionFormat 'full'
+        }
+    }
+}
+
+ext {
+    supportVersion = '23.2.1'
+    robolectricVersion = '3.0'
+    assertjVersion = '1.1.1'
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:$supportVersion",
+            "com.android.support:recyclerview-v7:$supportVersion",
+            "com.android.support:design:$supportVersion"
+    testCompile "org.robolectric:robolectric:$robolectricVersion",
+            "org.robolectric:shadows-support-v4:$robolectricVersion",
+            'org.mockito:mockito-core:1.9.5+',
+            'junit:junit:4.12'
+    testCompile("com.squareup.assertj:assertj-android:$assertjVersion") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile files('libs/picasso-2.5.2.jar')
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
+    reports {
+        xml.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
+
+    executionData = files "${buildDir}/jacoco/testDebugUnitTest.exec"
+    sourceDirectories = files android.sourceSets.main.java.srcDirs
+    classDirectories = fileTree(dir: "${buildDir}/intermediates/classes/debug",
+            exclude: [ '**/R.class', '**/R$*.class' ])
+
+    doLast {
+        println "coverage report generated at file://${reports.html.destination}/index.html"
+    }
+}

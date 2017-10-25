@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:orientation="horizontal"
+    android:background="#fff" >
+    <!-- 유저 프로필 이미지 -->
+    <ImageView
+        android:id="@+id/list_view_row_profile_thumbnail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#E44044" />
+    <!-- /유저 프로필 이미지 -->
+    <!-- 유저 스크린네임, 텍스트 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical" >
+        <TextView
+            android:id="@+id/list_view_row_user_screen_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="screen_name"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:textColor="#666666" />
+        <TextView
+            android:id="@+id/list_view_row_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:text="text"
+            android:textSize="11dp"
+            android:textColor="#666666" />
+    </LinearLayout>
+</LinearLayout>
