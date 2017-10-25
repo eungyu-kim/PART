@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2"
+        android:layout_height="0dp"
+        android:layout_weight="0.08"
         android:background="@color/thema"
         android:orientation="vertical">
         <TextView
@@ -24,8 +24,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2"
+        android:layout_height="0dp"
+        android:layout_weight="0.07"
         android:orientation="horizontal">
 
         <ImageButton
@@ -63,8 +63,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.1"
+        android:layout_height="0dp"
+        android:layout_weight="0.139"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,8 +132,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.237"
         android:orientation="vertical">
 
         <ImageView
@@ -145,8 +145,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.237"
         android:orientation="vertical">
 
         <LinearLayout
@@ -176,8 +176,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_weight="0.237"
         android:orientation="vertical"
         android:onClick="true"
         android:id="@+id/goparty">
