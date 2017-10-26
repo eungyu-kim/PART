@@ -53,8 +53,8 @@ public class LoginActivity  extends AppCompatActivity {
         GoTmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //        Intent it = new Intent(LoginActivity.this, TmapMain.class);
-                //          startActivity(it);
+                Intent it = new Intent(LoginActivity.this, TmapMain.class);
+                startActivity(it);
             }
         });
 
