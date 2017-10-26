@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by soslt on 2017-10-26.
  */
@@ -22,6 +24,7 @@ public class LoginActivity  extends AppCompatActivity {
         ImageButton GoToPlan = (ImageButton)findViewById(R.id.goplan);
         ImageButton GoTmap = (ImageButton)findViewById(R.id.goTmap);
         TextView Title = (TextView)findViewById(R.id.title);
+        TextView RegisterButton = (TextView) findViewById(R.id.registerButton);
 
         // 타이틀글꼴 변경
         Typeface typeface = Typeface.createFromAsset(getAssets(), "NanumPen.ttf");
@@ -52,6 +55,15 @@ public class LoginActivity  extends AppCompatActivity {
             public void onClick(View view) {
                 //        Intent it = new Intent(LoginActivity.this, TmapMain.class);
                 //          startActivity(it);
+            }
+        });
+
+        //회원가입으로 화면 이동
+        RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(it);
             }
         });
 

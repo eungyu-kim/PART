@@ -116,7 +116,7 @@
                     android:hint="아이디"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:textColor="#BEC6C8"
+                    android:textColor="#737373"
                     android:textColorHint="#BEC6C8"
                     android:id="@+id/idText"
                     android:drawableStart="@drawable/ic_person_black_24dp"
@@ -131,7 +131,7 @@
                     android:hint="비밀번호"
                     android:layout_gravity="center"
                     android:padding="10dp"
-                    android:textColor="#BEC6C8"
+                    android:textColor="#737373"
                     android:textColorHint="#BEC6C8"
                     android:id="@+id/passwordText"
                     android:drawableStart="@drawable/ic_lock_black_24dp"
@@ -163,11 +163,11 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="0.4"
                         android:layout_gravity="top"
                         android:textSize="18dp"
                         android:layout_marginTop="5dp"
                         android:text="회원가입"
-                        android:layout_weight="0.4"
                         android:id="@+id/registerButton"/>
 
                     <TextView
@@ -177,8 +177,8 @@
 
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_weight="0.39"
                         android:layout_height="match_parent"
+                        android:layout_weight="0.39"
                         android:layout_gravity="top"
                         android:textSize="18dp"
                         android:layout_marginTop="5dp"
