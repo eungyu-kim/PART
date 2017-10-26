@@ -289,16 +289,17 @@ public class MainActivity extends AppCompatActivity {
         //아이디 가져오기
         ImageButton GoToPlan = (ImageButton)findViewById(R.id.goplan);
         ImageButton GoTmap = (ImageButton)findViewById(R.id.goTmap);
+        ImageButton GoMypage = (ImageButton)findViewById(R.id.goMypage);
         LinearLayout GoParty = (LinearLayout)findViewById(R.id.goparty);
         TextView Month1 = (TextView)findViewById(R.id.month1);
         TextView Month2 = (TextView)findViewById(R.id.month2);
         final Button Search_Btn = (Button)findViewById(R.id.main_search_btn);
-        TextView title = (TextView) findViewById(R.id.Title);
+        TextView Title = (TextView) findViewById(R.id.title);
 
         // 타이틀글꼴 변경
         Typeface typeface = Typeface.createFromAsset(getAssets(), "NanumPen.ttf");
-        title.setTypeface(typeface);
-        title.append("PART");
+        Title.setTypeface(typeface);
+        Title.append("PART");
 
         //여행계획으로 화면 이동
         GoToPlan.setOnClickListener(new View.OnClickListener() {
@@ -315,6 +316,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
         //        Intent it = new Intent(MainActivity.this, TmapMain.class);
         //          startActivity(it);
+            }
+        });
+
+        //마이페이지로 화면 이동
+        GoMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(it);
             }
         });
 
