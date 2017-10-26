@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -43,6 +44,11 @@ public class LocalSearchActivity extends AppCompatActivity {
     LocalListViewAdapter adapter;
     //메인화면에서 받은 지역데이터
     String MainCategory, MiddleCategory;
+    boolean lastitemVisibleFlag = false;		//화면에 리스트의 마지막 아이템이 보여지는지 체크
+    //받은정보 데이터 페이지 카운터
+    int Contentcount=1, maxcount =0;
+    //받는 정보 분류
+    int contentTypeId=12;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +92,12 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int count ;
                 count = adapter.getCount() ;
-
+                contentTypeId =39;
+                Contentcount=1;
                 if (count > 0) {
                         // listview 데이터 삭제
                         adapter.removeall();
-                        getData(RestaurantURL(MainCategory,MiddleCategory));
+                        getData(CreateURL(MainCategory,MiddleCategory));
                         Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -102,7 +109,8 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int count ;
                 count = adapter.getCount() ;
-
+                contentTypeId =12;
+                Contentcount=1;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
@@ -118,11 +126,12 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int count ;
                 count = adapter.getCount() ;
-
+                contentTypeId = 28;
+                Contentcount=1;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    getData(LeisureURL(MainCategory,MiddleCategory));
+                    getData(CreateURL(MainCategory,MiddleCategory));
                     Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -134,13 +143,39 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int count ;
                 count = adapter.getCount() ;
-
+                contentTypeId = 32;
+                Contentcount=1;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    getData(HotelURL(MainCategory,MiddleCategory));
+                    getData(CreateURL(MainCategory,MiddleCategory));
                     Locla_S_List.setAdapter(adapter);
                 }
+            }
+        });
+
+        //리스트뷰 바닥에 닿았을 때
+        Locla_S_List.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                //OnScrollListener.SCROLL_STATE_IDLE은 스크롤이 이동하다가 멈추었을때 발생되는 스크롤 상태입니다.
+                //즉 스크롤이 바닦에 닿아 멈춘 상태에 처리를 하겠다는 뜻
+                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastitemVisibleFlag) {
+                    //TODO 화면이 바닦에 닿을때 처리
+                    Log.d("listview","바닥에 닿음"+Contentcount);
+                    int count = adapter.getCount();
+                    // 아이템 추가.
+                    //items.add("LIST" + Integer.toString(count + 1));
+                    getData(CreateURL(MainCategory,MiddleCategory));
+                    // listview 갱신
+                    //adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //현재 화면에 보이는 첫번째 리스트 아이템의 번호(firstVisibleItem) + 현재 화면에 보이는 리스트 아이템의 갯수(visibleItemCount)가 리스트 전체의 갯수(totalItemCount) -1 보다 크거나 같을때
+                lastitemVisibleFlag = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
             }
         });
     }
@@ -194,6 +229,12 @@ public class LocalSearchActivity extends AppCompatActivity {
             String items = Body.getString("items");
             Log.d("Result","items 결과"+items);
 
+            //페이지 최대값
+            String numOfRows = Body.getString("numOfRows");
+            maxcount = Integer.parseInt(numOfRows);
+            if (Contentcount<maxcount)
+                Contentcount++;
+
             JSONObject Item = new JSONObject(items);
             String item = Item.getString("item");
             Log.d("Result","item 결과"+item);
@@ -243,8 +284,8 @@ public class LocalSearchActivity extends AppCompatActivity {
     protected String CreateURL(String areaCode, String sigunguCode) {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
-        String mid="&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
-        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String mid="&contentTypeId="+contentTypeId+"&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
     }
@@ -253,7 +294,7 @@ public class LocalSearchActivity extends AppCompatActivity {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
         String mid="&contentTypeId=39&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
-        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
     }
@@ -261,7 +302,7 @@ public class LocalSearchActivity extends AppCompatActivity {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
         String mid="&contentTypeId=28&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
-        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json";
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
     }
@@ -269,7 +310,7 @@ public class LocalSearchActivity extends AppCompatActivity {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
         String mid="&contentTypeId=32&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
-        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json";
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
     }
