@@ -38,6 +38,7 @@
         <activity android:name=".EditActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
+        <activity android:name=".TravelCourseActivity"/>
 
     </application>
 
