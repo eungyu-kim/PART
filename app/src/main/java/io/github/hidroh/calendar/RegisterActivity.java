@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
                             if (success){
                                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                dialog = builder.setMessage("사용할 수 있는 아이디입니다.").setPositiveButton("확인", null).create();
+                                dialog = builder.setMessage("사용 가능한 아이디입니다.").setPositiveButton("확인", null).create();
                                 dialog.show();
                                 idText.setEnabled(false);
                                 validate = true;
