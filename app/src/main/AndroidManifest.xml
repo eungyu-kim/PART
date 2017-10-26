@@ -29,12 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlanActivity"/>
         <activity android:name=".PartyActivity"/>
+        <activity android:name=".PlanActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LocalSearchActivity"/>
         <activity android:name=".EditActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".LocalSearchActivity"/>
+
     </application>
 
 </manifest>
