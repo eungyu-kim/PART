@@ -15,4 +15,6 @@
     <color name="searchbtn">#3498db</color>
     <color name="searchtext">#f5fafa</color>
     <color name="thema">#4AB368</color>
+    <color name="colorWarning">#ED00CB</color>
+    <color name="colorGray">#8C8C8C</color>
 </resources>
