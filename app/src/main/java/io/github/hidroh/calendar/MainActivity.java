@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner_2);
         spin1.setPrompt("대분류 지역을 선택하세요.");
         Button btn_search = (Button) findViewById(R.id.main_search_btn);
+        LinearLayout TravelCourse =(LinearLayout)findViewById(R.id.travelcourse);
 
         //메인 카테고리 선택 (지역)
         adspin1 = ArrayAdapter.createFromResource(this, R.array.spinner_main, android.R.layout.simple_spinner_dropdown_item); // 첫번째 어댑터에 값 넣기
@@ -360,6 +361,16 @@ public class MainActivity extends AppCompatActivity {
         //현재 월 텍스트 출력
         Month1.setText(getTime(1));
         Month2.setText(getTime(1));
+
+        //여행 코스 화면으로 이동
+        TravelCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MainActivity.this, TravelCourseActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
     }
 

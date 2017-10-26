@@ -11,7 +11,6 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,140 +21,58 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by kug00 on 2017-10-17.
+ * Created by kug00 on 2017-10-27.
  */
 
-public class LocalSearchActivity extends AppCompatActivity {
+public class TravelCourseActivity extends AppCompatActivity {
     //JSON 문자열을 저장할 문자열
-    String localsearchdata;
+    String travelcoursedata;
     //JSON에서 목록을 만들기위한 배열
-    private static final String Locla_SID="contentid", Title = "title", address = "addr1", Image = "firstimage";
+    private static final String Course_SID="contentid", Title = "title", Image = "firstimage";
 
     //지역 정보를 담기위한 해쉬 리스트 선언
-    ArrayList<HashMap<String, String>> Locla_S_ListHash;
+    ArrayList<HashMap<String, String>> Course_S_ListHash;
     //지역정보를 저장하기 위한 표현하는 리스트 뷰 선언
-    ListView Locla_S_List;
+    ListView Course_S_List;
     //여행 리스트뷰 어댑터 선언
-    LocalListViewAdapter adapter;
+    TravelCourseListViewAdapter adapter;
     //메인화면에서 받은 지역데이터
-    String MainCategory, MiddleCategory;
     boolean lastitemVisibleFlag = false;		//화면에 리스트의 마지막 아이템이 보여지는지 체크
     //받은정보 데이터 페이지 카운터
     int Contentcount=1, maxcount =0;
     //받는 정보 분류
-    int contentTypeId=12;
+    int contentTypeId=25;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.localsearch);
-
+        setContentView(R.layout.travlecourse);
         //아이디 찾기
-        ImageButton Search_back = (ImageButton)findViewById(R.id.search_back);
-        Button Restaurant = (Button)findViewById(R.id.restaurant);
-        Locla_S_List = (ListView)findViewById(R.id.search_list);
-        Button Destination = (Button)findViewById(R.id.destination);
-        Button Leisure = (Button)findViewById(R.id.ㅣeisure);
-        Button Hotel = (Button)findViewById(R.id.hotel);
+        ImageButton TravelCourse_Back = (ImageButton)findViewById(R.id.travelcourse_back);
+        Course_S_List = (ListView)findViewById(R.id.travelcourse_list);
 
         //클래스 생성
         //지역정보를 저장하기 위한
-        Locla_S_ListHash = new ArrayList<HashMap<String, String>>();
+        Course_S_ListHash = new ArrayList<HashMap<String, String>>();
         //지역 정보를 커스텀  listView와 연결하기 위한 어뎁터
-        adapter = new LocalListViewAdapter();
+        adapter = new TravelCourseListViewAdapter();
 
-        //맨 상당 뒤로가기 버튼
-        Search_back.setOnClickListener(new View.OnClickListener() {
+        TravelCourse_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(LocalSearchActivity.this,MainActivity.class);
+                Intent it = new Intent(TravelCourseActivity.this,MainActivity.class);
                 startActivity(it);
                 finish();
             }
         });
-
-        //정보 전달 받기
-        Intent it = getIntent();
-        MainCategory = it.getStringExtra("areaCode");
-        MiddleCategory = it.getStringExtra("sigunguCode");
-        Toast.makeText(LocalSearchActivity.this, "1"+MainCategory+"2"+MiddleCategory, Toast.LENGTH_SHORT).show();
-        getData(CreateURL(MainCategory,MiddleCategory));
-
-
-        //맛집 버튼을 눌렀을 때
-        Restaurant.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count ;
-                count = adapter.getCount() ;
-                contentTypeId =39;
-                Contentcount=1;
-                if (count > 0) {
-                        // listview 데이터 삭제
-                        adapter.removeall();
-                        getData(CreateURL(MainCategory,MiddleCategory));
-                        Locla_S_List.setAdapter(adapter);
-                }
-            }
-        });
-
-        //관광지 버튼을 눌렀을 때
-        Destination.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count ;
-                count = adapter.getCount() ;
-                contentTypeId =12;
-                Contentcount=1;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
-                    Locla_S_List.setAdapter(adapter);
-                }
-            }
-        });
-
-        //레포츠 버튼을 눌렀을 때
-        Leisure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count ;
-                count = adapter.getCount() ;
-                contentTypeId = 28;
-                Contentcount=1;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
-                    Locla_S_List.setAdapter(adapter);
-                }
-            }
-        });
-
-        //숙박업소 버튼이 눌렸을 때
-        Hotel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int count ;
-                count = adapter.getCount() ;
-                contentTypeId = 32;
-                Contentcount=1;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
-                    Locla_S_List.setAdapter(adapter);
-                }
-            }
-        });
+        //리스트뷰 데이터 가져오기
+        getData(CreateURL());
 
         //리스트뷰 바닥에 닿았을 때
-        Locla_S_List.setOnScrollListener(new AbsListView.OnScrollListener() {
+        Course_S_List.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 //OnScrollListener.SCROLL_STATE_IDLE은 스크롤이 이동하다가 멈추었을때 발생되는 스크롤 상태입니다.
@@ -166,7 +83,7 @@ public class LocalSearchActivity extends AppCompatActivity {
                     int count = adapter.getCount();
                     // 아이템 추가.
                     //items.add("LIST" + Integer.toString(count + 1));
-                    getData(CreateURL(MainCategory,MiddleCategory));
+                    getData(CreateURL());
                     // listview 갱신
                     //adapter.notifyDataSetChanged();
                 }
@@ -179,7 +96,6 @@ public class LocalSearchActivity extends AppCompatActivity {
             }
         });
     }
-
     public void getData(String url){
         class GetDataJSON extends AsyncTask<String, Void, String> {
             @Override
@@ -202,7 +118,7 @@ public class LocalSearchActivity extends AppCompatActivity {
             }
             @Override
             protected void onPostExecute(String result) {
-                localsearchdata=result;
+                travelcoursedata=result;
                 showList();
             }
         }
@@ -212,11 +128,11 @@ public class LocalSearchActivity extends AppCompatActivity {
 
     protected void showList(){
         try {
-            //전체 데이터 출력 localsearchdata json으로 파싱 받은 데이터가 String 형식으로 되있다.
-            Log.d("Result","localsearchdata 전체데이터출력 : "+localsearchdata);
+            //전체 데이터 출력 travelcoursedata json으로 파싱 받은 데이터가 String 형식으로 되있다.
+            Log.d("Result","travelcoursedata 전체데이터출력 : "+travelcoursedata);
 
             //Json data -> JsonOject 변환
-            JSONObject jsonObj = new JSONObject(localsearchdata);
+            JSONObject jsonObj = new JSONObject(travelcoursedata);
             //JsonObject -> 하위 JsonObject Get
             String response = jsonObj.getString("response");
             Log.d("Result","response 결과"+response);
@@ -245,18 +161,13 @@ public class LocalSearchActivity extends AppCompatActivity {
             //JSONArray 길이만큼 반복
             for(int i=0;i<ItemArray.length();i++){
                 JSONObject c =ItemArray.getJSONObject(i);
-                String contentid = c.getString(Locla_SID);
+                String contentid = c.getString(Course_SID);
                 Log.d("Result","contentid 결과"+contentid);
                 String title = "제목이 없습니다.";
                 if(c.has(Image))
                     title = c.getString(Title);
                 else continue;
                 Log.d("Result","PartyTitle 결과"+title);
-                String addr1 = "주소가 없습니다.";
-                if(c.has(address))
-                    addr1 = c.getString(address);
-                else continue;
-                Log.d("Result","addr1 결과"+addr1);
                 String firstimage ="null";
                 //존재하지 않는경우 저장하지 않는다.
                 if(c.has(Image))
@@ -264,27 +175,26 @@ public class LocalSearchActivity extends AppCompatActivity {
                 else continue;
                 Log.d("Result","firstimage 결과"+firstimage);
 
-                HashMap<String,String> LocalHash = new HashMap<String,String>();
-                LocalHash.put(Locla_SID,contentid);
-                LocalHash.put(Title,title);
-                LocalHash.put(address,addr1);
-                LocalHash.put(Image,firstimage);
-                Locla_S_ListHash.add(LocalHash);
+                HashMap<String,String> CourseHash = new HashMap<String,String>();
+                CourseHash.put(Course_SID,contentid);
+                CourseHash.put(Title,title);
+                CourseHash.put(Image,firstimage);
+                Course_S_ListHash.add(CourseHash);
                 // 아이템 추가.
-                adapter.addItem(firstimage, title, addr1) ;
+                adapter.addItem(firstimage, title) ;
             }
             //행사정보 어댑터 리스트 뷰에 달기
-            Locla_S_List.setAdapter(adapter);
+            Course_S_List.setAdapter(adapter);
             //Log.d("Result","data 결과"+CreateURL());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    protected String CreateURL(String areaCode, String sigunguCode) {
+    protected String CreateURL() {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
-        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
-        String mid="&contentTypeId="+contentTypeId+"&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey="+servicekey;
+        String mid="&contentTypeId="+contentTypeId+"&areaCode=&sigunguCode=";
         String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
