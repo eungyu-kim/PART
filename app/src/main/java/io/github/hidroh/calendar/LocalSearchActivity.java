@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +41,8 @@ public class LocalSearchActivity extends AppCompatActivity {
     ListView Locla_S_List;
     //여행 리스트뷰 어댑터 선언
     LocalListViewAdapter adapter;
+    //메인화면에서 받은 지역데이터
+    String MainCategory, MiddleCategory;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,7 @@ public class LocalSearchActivity extends AppCompatActivity {
 
         //아이디 찾기
         ImageButton Search_back = (ImageButton)findViewById(R.id.search_back);
+        Button Restaurant = (Button)findViewById(R.id.restaurant);
         Locla_S_List = (ListView)findViewById(R.id.search_list);
 
         //클래스 생성
@@ -59,12 +64,24 @@ public class LocalSearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(LocalSearchActivity.this,MainActivity.class);
+                startActivity(it);
                 finish();
             }
         });
 
+        //정보 전달 받기
+        Intent it = getIntent();
+        MainCategory = it.getStringExtra("areaCode");
+        MiddleCategory = it.getStringExtra("sigunguCode");
+        Toast.makeText(LocalSearchActivity.this, "1"+MainCategory+"2"+MiddleCategory, Toast.LENGTH_SHORT).show();
+        getData(CreateURL(MainCategory,MiddleCategory));
 
-        getData(CreateURL());
+        Restaurant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getData(RestaurantURL(MainCategory,MiddleCategory));
+            }
+        });
     }
 
     public void getData(String url){
@@ -131,15 +148,18 @@ public class LocalSearchActivity extends AppCompatActivity {
                 String title = "제목이 없습니다.";
                 if(c.has(Image))
                     title = c.getString(Title);
+                else continue;
                 Log.d("Result","PartyTitle 결과"+title);
                 String addr1 = "주소가 없습니다.";
                 if(c.has(address))
                     addr1 = c.getString(address);
+                else continue;
                 Log.d("Result","addr1 결과"+addr1);
                 String firstimage ="null";
                 //존재하지 않는경우 저장하지 않는다.
                 if(c.has(Image))
                     firstimage = c.getString(Image);
+                else continue;
                 Log.d("Result","firstimage 결과"+firstimage);
 
                 HashMap<String,String> LocalHash = new HashMap<String,String>();
@@ -153,17 +173,27 @@ public class LocalSearchActivity extends AppCompatActivity {
             }
             //행사정보 어댑터 리스트 뷰에 달기
             Locla_S_List.setAdapter(adapter);
-            Log.d("Result","data 결과"+CreateURL());
+            //Log.d("Result","data 결과"+CreateURL());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    protected String CreateURL() {
+    protected String CreateURL(String areaCode, String sigunguCode) {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
-        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
-        String last="&contentTypeId=&areaCode=31&sigunguCode=1&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json";
-        String data  = first + servicekey + last;
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
+        String mid="&contentTypeId=12&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String data  = first  + mid  + last;
+        return data;
+    }
+
+    protected String RestaurantURL(String areaCode, String sigunguCode) {
+        String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
+        String mid="&contentTypeId=39&areaCode=" + areaCode + "sigunguCode="+sigunguCode;
+        String last="cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String data  = first  + mid  + last;
         return data;
     }
 }

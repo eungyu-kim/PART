@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout GoParty = (LinearLayout)findViewById(R.id.goparty);
         TextView Month1 = (TextView)findViewById(R.id.month1);
         TextView Month2 = (TextView)findViewById(R.id.month2);
-        Button Search_Btn = (Button)findViewById(R.id.main_search_btn);
+        final Button Search_Btn = (Button)findViewById(R.id.main_search_btn);
         TextView title = (TextView) findViewById(R.id.Title);
 
         // 타이틀글꼴 변경
@@ -327,11 +327,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         //지역검색 버튼 누를 시
         Search_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int text1 = spin1.getSelectedItemPosition();
+                String areaCode = String.valueOf(text1);
+                int text2 = spin2.getSelectedItemPosition();
+                String sigunguCode = String.valueOf(text2);
+                Toast.makeText(MainActivity.this, "1"+text1+"2"+text2, Toast.LENGTH_SHORT).show();
                 Intent it = new Intent(MainActivity.this, LocalSearchActivity.class);
+                it.putExtra("areaCode",areaCode);
+                it.putExtra("sigunguCode",sigunguCode);
                 startActivity(it);
                 finish();
             }
