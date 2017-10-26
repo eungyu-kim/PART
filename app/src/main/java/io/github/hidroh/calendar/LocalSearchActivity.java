@@ -52,6 +52,9 @@ public class LocalSearchActivity extends AppCompatActivity {
         ImageButton Search_back = (ImageButton)findViewById(R.id.search_back);
         Button Restaurant = (Button)findViewById(R.id.restaurant);
         Locla_S_List = (ListView)findViewById(R.id.search_list);
+        Button Destination = (Button)findViewById(R.id.destination);
+        Button Leisure = (Button)findViewById(R.id.ㅣeisure);
+        Button Hotel = (Button)findViewById(R.id.hotel);
 
         //클래스 생성
         //지역정보를 저장하기 위한
@@ -76,10 +79,68 @@ public class LocalSearchActivity extends AppCompatActivity {
         Toast.makeText(LocalSearchActivity.this, "1"+MainCategory+"2"+MiddleCategory, Toast.LENGTH_SHORT).show();
         getData(CreateURL(MainCategory,MiddleCategory));
 
+
+        //맛집 버튼을 눌렀을 때
         Restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData(RestaurantURL(MainCategory,MiddleCategory));
+                int count ;
+                count = adapter.getCount() ;
+
+                if (count > 0) {
+                        // listview 데이터 삭제
+                        adapter.removeall();
+                        getData(RestaurantURL(MainCategory,MiddleCategory));
+                        Locla_S_List.setAdapter(adapter);
+                }
+            }
+        });
+
+        //관광지 버튼을 눌렀을 때
+        Destination.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count ;
+                count = adapter.getCount() ;
+
+                if (count > 0) {
+                    // listview 데이터 삭제
+                    adapter.removeall();
+                    getData(CreateURL(MainCategory,MiddleCategory));
+                    Locla_S_List.setAdapter(adapter);
+                }
+            }
+        });
+
+        //레포츠 버튼을 눌렀을 때
+        Leisure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count ;
+                count = adapter.getCount() ;
+
+                if (count > 0) {
+                    // listview 데이터 삭제
+                    adapter.removeall();
+                    getData(LeisureURL(MainCategory,MiddleCategory));
+                    Locla_S_List.setAdapter(adapter);
+                }
+            }
+        });
+
+        //숙박업소 버튼이 눌렸을 때
+        Hotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int count ;
+                count = adapter.getCount() ;
+
+                if (count > 0) {
+                    // listview 데이터 삭제
+                    adapter.removeall();
+                    getData(HotelURL(MainCategory,MiddleCategory));
+                    Locla_S_List.setAdapter(adapter);
+                }
             }
         });
     }
@@ -191,8 +252,24 @@ public class LocalSearchActivity extends AppCompatActivity {
     protected String RestaurantURL(String areaCode, String sigunguCode) {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
-        String mid="&contentTypeId=39&areaCode=" + areaCode + "sigunguCode="+sigunguCode;
-        String last="cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String mid="&contentTypeId=39&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo=1&_type=json";
+        String data  = first  + mid  + last;
+        return data;
+    }
+    protected String LeisureURL(String areaCode, String sigunguCode) {
+        String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
+        String mid="&contentTypeId=28&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json";
+        String data  = first  + mid  + last;
+        return data;
+    }
+    protected String HotelURL(String areaCode, String sigunguCode) {
+        String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + servicekey;
+        String mid="&contentTypeId=32&areaCode=" + areaCode + "&sigunguCode="+sigunguCode;
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json";
         String data  = first  + mid  + last;
         return data;
     }

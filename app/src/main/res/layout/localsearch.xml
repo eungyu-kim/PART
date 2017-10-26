@@ -31,16 +31,11 @@
         android:orientation="horizontal"
         android:layout_weight="0.1">
         <Button
+            android:id="@+id/destination"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="관광지"
-            android:textSize="20sp"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="행사"
             android:textSize="20sp"/>
         <Button
             android:layout_width="0dp"
@@ -50,10 +45,18 @@
             android:text="맛집"
             android:textSize="20sp"/>
         <Button
+            android:id="@+id/hotel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="숙박"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/ㅣeisure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="레포츠"
             android:textSize="20sp"/>
     </LinearLayout>
 

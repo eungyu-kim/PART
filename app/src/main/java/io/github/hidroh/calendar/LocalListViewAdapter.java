@@ -78,4 +78,9 @@ public class LocalListViewAdapter extends BaseAdapter{
         item.setDesc(addr);
         listViewItemList.add(item);
     }
+
+    //리스트뷰 데이터 모두 제거
+    public void removeall() {
+        listViewItemList.clear();
+    }
 }
