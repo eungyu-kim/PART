@@ -286,6 +286,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, choice_main + " > " + choice_detail, Toast.LENGTH_SHORT).show(); // 선택된 대분류,세부분류를 출력함
             }
         });
+
         //아이디 가져오기
         ImageButton GoToPlan = (ImageButton)findViewById(R.id.goplan);
         ImageButton GoTmap = (ImageButton)findViewById(R.id.goTmap);
@@ -314,8 +315,8 @@ public class MainActivity extends AppCompatActivity {
         GoTmap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-        //        Intent it = new Intent(MainActivity.this, TmapMain.class);
-        //          startActivity(it);
+                Intent it = new Intent(MainActivity.this, TmapMain.class);
+                startActivity(it);
             }
         });
 

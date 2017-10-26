@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "io.github.hidroh.calendar"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -53,6 +53,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile files('libs/picasso-2.5.2.jar')
+    implementation files('libs/com.skp.Tmap_1.0.48.jar')
+    implementation project(':SDK_release_v1.0')
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {

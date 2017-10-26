@@ -29,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TmapMain"/>
         <activity android:name=".PartyActivity"/>
         <activity android:name=".PlanActivity"/>
         <activity android:name=".LoginActivity"/>
