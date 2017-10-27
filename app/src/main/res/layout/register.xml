@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        android:background="@color/thema"
+        android:background="@color/back_ground"
         android:orientation="vertical">
         <TextView
             android:id="@+id/title"
@@ -19,13 +19,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="70sp"
-            android:textColor="#ffffff"/>
+            android:text="PART"
+            android:textColor="@color/thema"/>
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.85"
+        android:background="@color/back_ground"
         android:orientation="vertical">
 
         <LinearLayout
@@ -48,7 +50,7 @@
                     <EditText
                         android:layout_width="190dp"
                         android:layout_height="wrap_content"
-                        android:hint="아이디"
+                        android:hint="아이디 (영문+숫자)"
                         android:layout_gravity="center"
                         android:padding="10dp"
                         android:textColor="#737373"
@@ -76,7 +78,7 @@
                     android:inputType="textPassword"
                     android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:hint="비밀번호"
+                    android:hint="비밀번호 (영문+숫자)"
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:textColor="#737373"

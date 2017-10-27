@@ -17,4 +17,5 @@
     <color name="thema">#4AB368</color>
     <color name="colorWarning">#ED00CB</color>
     <color name="colorGray">#8C8C8C</color>
+    <color name="back_ground">#FFF5EE</color>
 </resources>

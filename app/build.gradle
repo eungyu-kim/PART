@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 24
     buildToolsVersion '26.0.2'
 
     defaultConfig {
@@ -56,7 +56,6 @@ dependencies {
     compile files('libs/picasso-2.5.2.jar')
     implementation files('libs/com.skp.Tmap_1.0.48.jar')
     implementation project(':SDK_release_v1.0')
-
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
