@@ -124,9 +124,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="검 색"
-                android:textColor="@color/searchtext"
-                android:textSize="20dp"
-                android:background="@drawable/searchbtn"/>
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:background="@color/thema"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"/>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -194,7 +197,7 @@
                 android:id="@+id/month2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="현재일자 없습니다."
+                android:text="현재일자"
                 android:textSize="15sp"/>
             <TextView
                 android:id="@+id/textView2"

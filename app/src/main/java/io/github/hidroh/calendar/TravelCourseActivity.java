@@ -1,6 +1,7 @@
 package io.github.hidroh.calendar;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +52,15 @@ public class TravelCourseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.travlecourse);
+
+        TextView party_title_5 = (TextView) findViewById(R.id.travelcourse_title);
+        TextView party_title_6 = (TextView) findViewById(R.id.travelcourse_detail);
+        // 타이틀글꼴 변경
+        Typeface typeface_5 = Typeface.createFromAsset(getAssets(), "HoonWhitecatR.ttf");
+        party_title_5.setTypeface(typeface_5);
+        Typeface typeface_6 = Typeface.createFromAsset(getAssets(), "HoonWhitecatR.ttf");
+        party_title_6.setTypeface(typeface_6);
+
         //아이디 찾기
         ImageButton TravelCourse_Back = (ImageButton)findViewById(R.id.travelcourse_back);
         Course_S_List = (ListView)findViewById(R.id.travelcourse_list);

@@ -1,6 +1,7 @@
 package io.github.hidroh.calendar;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,6 +48,15 @@ public class PartyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.party);
+
+        TextView party_title_1 = (TextView) findViewById(R.id.tmonth1);
+        TextView party_title_2 = (TextView) findViewById(R.id.textView4);
+
+       // 타이틀글꼴 변경
+        Typeface typeface_1 = Typeface.createFromAsset(getAssets(), "HoonWhitecatR.ttf");
+        party_title_1.setTypeface(typeface_1);
+        Typeface typeface_2 = Typeface.createFromAsset(getAssets(), "HoonWhitecatR.ttf");
+        party_title_2.setTypeface(typeface_2);
 
         //아이디 찾기
         ImageButton GoMain = (ImageButton)findViewById(R.id.gomain);
