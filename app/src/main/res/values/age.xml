@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="major">
+    <string-array name="age">
         <item>0살 ~ 9살</item>
         <item>10살 ~ 19살</item>
         <item>20살 ~ 29살</item>
