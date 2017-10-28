@@ -1,11 +1,15 @@
 package io.github.hidroh.calendar;
 
+        import android.app.Activity;
         import android.content.Intent;
         import android.graphics.Typeface;
+        import android.net.Uri;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
         import android.util.Log;
+        import android.view.MotionEvent;
         import android.view.View;
+        import android.view.animation.AnimationUtils;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
@@ -14,11 +18,19 @@ package io.github.hidroh.calendar;
         import android.widget.Spinner;
         import android.widget.TextView;
         import android.widget.Toast;
+        import android.widget.ViewFlipper;
 
         import java.text.SimpleDateFormat;
         import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    // viewflipper 이미지 자동 슬라이드 설정
+    final Activity activity = this;
+    ViewFlipper flipper;
+    float xAtDown;
+    float xAtUp;
+
     long mNow;
     Date mDate;
     //전체 일자 출력
@@ -32,10 +44,39 @@ public class MainActivity extends AppCompatActivity {
     // 검색 시, 선택된 메세지 띄우기 초기화
     String choice_main="";
     String choice_detail="";
+
+    public boolean onTouchEvent(MotionEvent touchevent){
+        switch (flipper.getDisplayedChild()) {
+            case 0:
+                Intent intent = new Intent(
+                        Intent.ACTION_VIEW, Uri.parse("https://fall.visitkorea.or.kr/theme/coupon.do"));
+                startActivity(intent);
+                break;
+            case 1:
+                Intent intent1 = new Intent(
+                        Intent.ACTION_VIEW, Uri.parse("https://txbus.t-money.co.kr/main.do"));
+                startActivity(intent1);
+                break;
+            case 2:
+                Intent intent2 = new Intent(
+                        Intent.ACTION_VIEW, Uri.parse("http://www.kma.go.kr/weather/forecast/timeseries.jsp"));
+                startActivity(intent2);
+                break;
+        }
+         return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        flipper = (ViewFlipper) findViewById(R.id.viewFlipper);
+        flipper.setInAnimation(AnimationUtils.loadAnimation(this,R.anim.fade));
+        flipper.setOutAnimation(AnimationUtils.loadAnimation(this,R.anim.fade));
+
+        flipper.setFlipInterval(5000); // 자동 5초 슬라이더
+        flipper.startFlipping(); // 시작
 
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner_1);
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner_2);
