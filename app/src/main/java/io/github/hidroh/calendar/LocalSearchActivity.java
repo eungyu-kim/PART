@@ -1,6 +1,7 @@
 package io.github.hidroh.calendar;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -82,9 +84,7 @@ public class LocalSearchActivity extends AppCompatActivity {
         Intent it = getIntent();
         MainCategory = it.getStringExtra("areaCode");
         MiddleCategory = it.getStringExtra("sigunguCode");
-        Toast.makeText(LocalSearchActivity.this, "1"+MainCategory+"2"+MiddleCategory, Toast.LENGTH_SHORT).show();
         getData(CreateURL(MainCategory,MiddleCategory));
-
 
         //맛집 버튼을 눌렀을 때
         Restaurant.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +178,31 @@ public class LocalSearchActivity extends AppCompatActivity {
                 lastitemVisibleFlag = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
             }
         });
+
+        //리스트 뷰 클릭시 이벤트
+        Locla_S_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // get item
+                //LocalListViewItem item = (LocalListViewItem) parent.getItemAtPosition(position) ;
+                Intent it = new Intent(LocalSearchActivity.this, DetailActivity.class);
+
+                //클릭 위치 출력력
+                // Log.d("ListView","position:"+position);
+
+                //컨텐츠 ID 넣기
+                it.putExtra("It_ContentTypeId",contentTypeId);
+
+                //해쉬맵 가져오기
+                HashMap<String,String> DetailHash;
+                DetailHash = Locla_S_ListHash.get(position);
+
+                //해쉬맵 넘기기
+                it.putExtra("DetailHash",DetailHash);
+                //다음 화면으로
+                startActivity(it);
+            }
+        }) ;
     }
 
     public void getData(String url){
