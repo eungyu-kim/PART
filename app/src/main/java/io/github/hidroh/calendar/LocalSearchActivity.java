@@ -190,6 +190,7 @@ public class LocalSearchActivity extends AppCompatActivity {
                 //클릭 위치 출력력
                 // Log.d("ListView","position:"+position);
 
+
                 //컨텐츠 ID 넣기
                 it.putExtra("It_ContentTypeId",contentTypeId);
 

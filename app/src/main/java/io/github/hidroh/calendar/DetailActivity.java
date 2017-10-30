@@ -5,13 +5,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,7 +67,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //Id 얻기
         detail_contentId = DetailHash.get(Detail_SID);
-        Log.d("ListView","contentId:"+detail_contentId);
+        //Log.d("ListView","contentId:"+detail_contentId);
 
         //타이틀 얻기
         String detail_title = DetailHash.get(Detail_Title);
@@ -149,7 +149,7 @@ public class DetailActivity extends AppCompatActivity {
             if(jsonvalue.has(Overview))
                 value = jsonvalue.getString(Overview);
             Log.d("Result","Overview 결과"+value);
-            TextView_intro.setText(value);
+            TextView_intro.setText(Html.fromHtml(value));
 
         } catch (JSONException e) {
             e.printStackTrace();
