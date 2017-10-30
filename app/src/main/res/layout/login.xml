@@ -148,7 +148,8 @@
                     android:background="@color/thema"
                     android:text="로그인"
                     android:layout_marginTop="10dp"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:id="@+id/loginButton"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

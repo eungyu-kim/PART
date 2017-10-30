@@ -34,6 +34,7 @@
         <activity android:name=".PartyActivity"/>
         <activity android:name=".PlanActivity"/>
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".MyPage"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".LocalSearchActivity"/>
         <activity android:name=".EditActivity"
