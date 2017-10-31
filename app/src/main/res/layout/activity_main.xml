@@ -160,10 +160,11 @@
         </ViewFlipper>
     </LinearLayout>
 
+    
     <LinearLayout
         android:id="@+id/travelcourse"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:layout_weight="0.237"
         android:orientation="vertical"
         android:onClick="true">
@@ -171,28 +172,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/month1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="현재일자 없습니다."
-                android:textSize="15sp" />
+                android:text="몇"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="#ff6347"/>
 
             <TextView
                 android:id="@+id/textView00"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="월 추천 여행지"
-                android:textSize="15sp" />
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="@color/thema" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:text="    + 자세히 보기"
+                android:textStyle="bold"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:layout_height="140dp"
+            android:background="@drawable/main_1" />
     </LinearLayout>
 
     <LinearLayout
@@ -206,25 +220,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp">
             <TextView
                 android:id="@+id/month2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="현재일자"
-                android:textSize="15sp"/>
+                android:text="몇"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="#ff6347"/>
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="월 행사정보"
-                android:textSize="15sp"/>
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="@color/thema"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:text="    + 자세히 보기"
+                android:textStyle="bold"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:layout_height="140dp"
+            android:background="@drawable/main_2" />
     </LinearLayout>
+
 </LinearLayout>
