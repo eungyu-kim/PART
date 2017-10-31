@@ -39,38 +39,6 @@ public class LoginActivity  extends AppCompatActivity {
         TextView Title = (TextView)findViewById(R.id.title);
         TextView RegisterButton = (TextView) findViewById(R.id.registerButton);
 
-        // 타이틀글꼴 변경
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "NanumPen.ttf");
-        Title.setTypeface(typeface);
-        Title.append("PART");
-
-        //홈 화면 이동
-        GoHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(it);
-            }
-        });
-
-        //여행계획으로 화면 이동
-        GoToPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(LoginActivity.this, PlanActivity.class);
-                startActivity(it);
-            }
-        });
-
-        //길찾기로 화면 이동!! 여기서 TmapMain으로 이동해서 시작
-        GoTmap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(LoginActivity.this, TmapMain.class);
-                startActivity(it);
-            }
-        });
-
         //회원가입으로 화면 이동
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
