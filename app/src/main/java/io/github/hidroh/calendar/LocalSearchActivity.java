@@ -92,7 +92,7 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int count ;
                 count = adapter.getCount() ;
-                contentTypeId =39;
+                contentTypeId = 39;
                 Contentcount=1;
                 if (count > 0) {
                         // listview 데이터 삭제
@@ -185,23 +185,87 @@ public class LocalSearchActivity extends AppCompatActivity {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
                 //LocalListViewItem item = (LocalListViewItem) parent.getItemAtPosition(position) ;
-                Intent it = new Intent(LocalSearchActivity.this, DetailActivity.class);
 
-                //클릭 위치 출력력
-                // Log.d("ListView","position:"+position);
+                if (contentTypeId ==12) {
+                    Intent it = new Intent(LocalSearchActivity.this, DetailActivity.class);
 
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
 
-                //컨텐츠 ID 넣기
-                it.putExtra("It_ContentTypeId",contentTypeId);
+                    //컨텐츠 ID 넣기
+                    it.putExtra("It_ContentTypeId", contentTypeId);
 
-                //해쉬맵 가져오기
-                HashMap<String,String> DetailHash;
-                DetailHash = Locla_S_ListHash.get(position);
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Locla_S_ListHash.get(position);
 
-                //해쉬맵 넘기기
-                it.putExtra("DetailHash",DetailHash);
-                //다음 화면으로
-                startActivity(it);
+                    //해쉬맵 넘기기
+                    it.putExtra("DetailHash", DetailHash);
+                    //다음 화면으로
+                    startActivity(it);
+                }
+                //맛집 상세정보 넘기기
+                if (contentTypeId == 39) {
+                    Intent food_it = new Intent(LocalSearchActivity.this, FoodActivity.class);
+
+                    //Log.d("ListView","position:"+contentTypeId);
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
+
+                    //컨텐츠 ID 넣기
+                    /*food_it.putExtra("It_ContentTypeId", contentTypeId);
+
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Locla_S_ListHash.get(position);
+
+                    //해쉬맵 넘기기
+                    food_it.putExtra("DetailHash", DetailHash);*/
+                    //다음 화면으로
+                    startActivity(food_it);
+                    //startActivity(food_it);
+                }
+                //레포츠 상세정보 넘기기
+                if (contentTypeId == 28) {
+                    Intent Leisure_it = new Intent(LocalSearchActivity.this, LeisureActivity.class);
+
+                    //Log.d("ListView","position:"+contentTypeId);
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
+
+                    //컨텐츠 ID 넣기
+                    /*food_it.putExtra("It_ContentTypeId", contentTypeId);
+
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Locla_S_ListHash.get(position);
+
+                    //해쉬맵 넘기기
+                    food_it.putExtra("DetailHash", DetailHash);*/
+                    //다음 화면으로
+                    startActivity(Leisure_it);
+                }
+
+                //숙박 상세정보 넘기기
+                if (contentTypeId == 32) {
+                    Intent Leisure_it = new Intent(LocalSearchActivity.this, HotelActivity.class);
+
+                    //Log.d("ListView","position:"+contentTypeId);
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
+
+                    //컨텐츠 ID 넣기
+                    /*food_it.putExtra("It_ContentTypeId", contentTypeId);
+
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Locla_S_ListHash.get(position);
+
+                    //해쉬맵 넘기기
+                    food_it.putExtra("DetailHash", DetailHash);*/
+                    //다음 화면으로
+                    startActivity(Leisure_it);
+                }
             }
         }) ;
     }
@@ -239,21 +303,21 @@ public class LocalSearchActivity extends AppCompatActivity {
     protected void showList(){
         try {
             //전체 데이터 출력 localsearchdata json으로 파싱 받은 데이터가 String 형식으로 되있다.
-            Log.d("Result","localsearchdata 전체데이터출력 : "+localsearchdata);
+            //Log.d("Result","localsearchdata 전체데이터출력 : "+localsearchdata);
 
             //Json data -> JsonOject 변환
             JSONObject jsonObj = new JSONObject(localsearchdata);
             //JsonObject -> 하위 JsonObject Get
             String response = jsonObj.getString("response");
-            Log.d("Result","response 결과"+response);
+            //Log.d("Result","response 결과"+response);
 
             JSONObject Response = new JSONObject(response);
             String body = Response.getString("body");
-            Log.d("Result","body 결과"+body);
+            //Log.d("Result","body 결과"+body);
 
             JSONObject Body = new JSONObject(body);
             String items = Body.getString("items");
-            Log.d("Result","items 결과"+items);
+            //Log.d("Result","items 결과"+items);
 
             //페이지 최대값
             String numOfRows = Body.getString("numOfRows");
@@ -272,23 +336,23 @@ public class LocalSearchActivity extends AppCompatActivity {
             for(int i=0;i<ItemArray.length();i++){
                 JSONObject c =ItemArray.getJSONObject(i);
                 String contentid = c.getString(Locla_SID);
-                Log.d("Result","contentid 결과"+contentid);
+                //Log.d("Result","contentid 결과"+contentid);
                 String title = "제목이 없습니다.";
                 if(c.has(Image))
                     title = c.getString(Title);
                 else continue;
-                Log.d("Result","PartyTitle 결과"+title);
+                //Log.d("Result","PartyTitle 결과"+title);
                 String addr1 = "주소가 없습니다.";
                 if(c.has(address))
                     addr1 = c.getString(address);
                 else continue;
-                Log.d("Result","addr1 결과"+addr1);
+                //Log.d("Result","addr1 결과"+addr1);
                 String firstimage ="null";
                 //존재하지 않는경우 저장하지 않는다.
                 if(c.has(Image))
                     firstimage = c.getString(Image);
                 else continue;
-                Log.d("Result","firstimage 결과"+firstimage);
+                //Log.d("Result","firstimage 결과"+firstimage);
 
                 HashMap<String,String> LocalHash = new HashMap<String,String>();
                 LocalHash.put(Locla_SID,contentid);

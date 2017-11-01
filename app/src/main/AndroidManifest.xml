@@ -42,6 +42,9 @@
         </activity>
         <activity android:name=".TravelCourseActivity"/>
         <activity android:name=".DetailActivity"/>
+        <activity android:name=".FoodActivity"/>
+        <activity android:name=".LeisureActivity"/>
+        <activity android:name=".HotelActivity"/>
 
     </application>
 
