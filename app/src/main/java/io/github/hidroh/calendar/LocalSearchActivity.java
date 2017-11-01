@@ -189,7 +189,7 @@ public class LocalSearchActivity extends AppCompatActivity {
                 if (contentTypeId ==12) {
                     Intent it = new Intent(LocalSearchActivity.this, DetailActivity.class);
 
-                    //클릭 위치 출력력
+                    //클릭 위치 출력
                     // Log.d("ListView","position:"+position);
 
                     //컨텐츠 ID 넣기
