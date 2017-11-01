@@ -9,10 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +51,8 @@ public class TravelCourseActivity extends AppCompatActivity {
     int Contentcount=1, maxcount =0;
     //받는 정보 분류
     int contentTypeId=25;
+    //스피너 선언
+    ArrayAdapter<CharSequence> adspin1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,29 @@ public class TravelCourseActivity extends AppCompatActivity {
         //아이디 찾기
         ImageButton TravelCourse_Back = (ImageButton)findViewById(R.id.travelcourse_back);
         Course_S_List = (ListView)findViewById(R.id.travelcourse_list);
+        final Button Search_Btn = (Button)findViewById(R.id.travelcourse_search_btn);
+
+        final Spinner spin1 = (Spinner) findViewById(R.id.spinner_1);
+        spin1.setPrompt("대분류 지역을 선택하세요.");
+        // 메인 카테고리 선택 (지역)
+        adspin1 = ArrayAdapter.createFromResource(this, R.array.spinner_main, android.R.layout.simple_spinner_dropdown_item); // 첫번째 어댑터에 값 넣기
+        // simple_spinner_dropdown_item은 안드로이드에서 제공하는 스피너 모양
+        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin1.setAdapter(adspin1); //어댑터에 값들을 spinner에 넣기.. 첫번째 끝!!
+
+        //지역검색 버튼 누를 시
+        Search_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int text1 = spin1.getSelectedItemPosition();
+                String areaCode = String.valueOf(text1);
+                Toast.makeText(TravelCourseActivity.this, "1"+text1, Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(TravelCourseActivity.this, LocalSearchActivity.class);
+                it.putExtra("areaCode",areaCode);
+                startActivity(it);
+                finish();
+            }
+        });
 
         //클래스 생성
         //지역정보를 저장하기 위한
