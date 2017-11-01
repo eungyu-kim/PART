@@ -109,6 +109,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
+                        android:textColor="@color/thema"
                         android:textSize="20sp" />
 
                     <TextView
@@ -124,6 +125,7 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="주차시설"
+                        android:textColor="@color/thema"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
@@ -142,6 +144,7 @@
                         android:layout_height="wrap_content"
                         android:padding="5dp"
                         android:text="휴일"
+                        android:textColor="@color/thema"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"

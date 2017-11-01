@@ -135,8 +135,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="17dp"
         android:layout_weight="0.237"
+        android:layout_marginTop="7dp"
         android:orientation="vertical">
         <ViewFlipper
             android:layout_width="match_parent"
