@@ -94,7 +94,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/intro"
+                        android:id="@+id/detail_intro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -112,6 +112,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/TextView_Infocenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -129,27 +130,11 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/TextView_parking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="체험안내"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="주차시설 정보가 없습니다."
                         android:textSize="15sp" />
 
                     <TextView
@@ -163,10 +148,11 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/TextView_Restdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="휴일 정보가 없습니다."
                         android:textSize="15sp" />
 
                 </LinearLayout>
