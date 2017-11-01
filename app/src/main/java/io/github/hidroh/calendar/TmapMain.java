@@ -396,7 +396,7 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
                     int subPathArraycount = subPathArray.length();
 // 반환 데이터 스트링으로
 
-                    int busID=0;
+                    routedetail=""; // 초기화
                     for(int b = 0; b<subPathArraycount; b++){
                         JSONObject subPathOBJ = subPathArray.getJSONObject(b);
                         int Type = subPathOBJ.getInt("trafficType"); // 이동방법
@@ -421,14 +421,13 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
                             JSONArray laneObj = subPathOBJ.getJSONArray("lane");
                             if(Type == 1 ){ // 지하철
                                 String subwayName = laneObj.getJSONObject(0).getString("name"); // 지하철 정보(몇호선)
-                                String subwaycode = laneObj.getJSONObject(0).getString("subwayCode"); // 지하철 노선번호
-                                routedetail += subwayName + "["+ subwaycode +"]" + "번 지하철 탑승 ";
+                               // String subwaycode = laneObj.getJSONObject(0).getString("subwayCode"); // 지하철 노선번호
+                                routedetail += subwayName + " 지하철 탑승 ";
                             }
                             if(Type == 2 ) { // 버스..
                                 String busNo = laneObj.getJSONObject(0).getString("busNo"); // 버스번호정보
                                 String busroute = " ["+busNo+ "] 번 버스 탑승 ";
                                 routedetail += busroute;
-                                busID = laneObj.getJSONObject(0).getInt("busID"); // 버스정류장 id
                             }
                         }
                         int distance = subPathOBJ.getInt("distance"); // 이동길이
@@ -439,12 +438,12 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
 ////////////////////////////////////////////////////////////addlist 넣기!!! 한줄마다 listview설정하기
                     } // 세부경로 종료
 
-                    routedetail += "\n\n총 " + Integer.toString(totalTime) + "분 소요됩니다.  감사합니다^^\n----------------------------------------------------------------------------- \n\n" ;
+                    routedetail += "\n\n총 " + Integer.toString(totalTime) + "분 소요됩니다.  감사합니다^^\n---------------------------------------------------------------- \n\n" ;
 // api 경로 좌표 요청
-
+                    Dialogview();
                     OdsayAPiroute(mapObj);
 // 화면에 버스 및 지하철 경로 출력
-                    Dialogview();
+
                     break;
                 }
             }
@@ -470,7 +469,7 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
     // 경로 디테일
     private void OdsayAPiroute(String mapObj) {
         ODsayService odsayService;
-        odsayService = ODsayService.init(getApplicationContext(), "sQLpd8xKI0T/bdwm9GFL1CBK9Ug98t81fst+OtALNQM");
+        odsayService = ODsayService.init(getApplicationContext(), "5Vq83w/lRS6BYBFCS/QM77UFYnTlqRyHkJGe87dbalw");
         odsayService.setReadTimeout(3000);
         odsayService.setConnectionTimeout(3000);
 // 서버 통신
