@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Handler;
@@ -61,7 +62,7 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
     int subwayType = 0;
     JSONObject jsonObject; // json 파싱 객체생성
     String routedetail = ""; // 세부적인 경로 나올 데이터
-    public static final int REQUEST_CODE_ACCESS_FINE_LOCATION = 255; // 첫 출발지는 수원역
+    public static final int REQUEST_CODE_ACCESS_FINE_LOCATION = 255; // 첫 출발지는 서울역
 
     private TMapView m_tmapView = null;
 
@@ -103,6 +104,17 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tmapxml);
+
+        ImageButton Tmap_Back = (ImageButton)findViewById(R.id.tmap_back);
+
+        Tmap_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(TmapMain.this, MainActivity.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
         // ACCESS_FINE_LOCATION 퍼미션이 있는지 확인한다
         // 롤리팝 이후로는 ACCESS_FINE_LOCATION은 코드상으로 확인 해야함
@@ -390,43 +402,46 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
                         int Type = subPathOBJ.getInt("trafficType"); // 이동방법
                         switch (Type){
                             case 1:
-                                routedetail += "지하철 ";
+                                routedetail += "\n지하철\n-> ";
                                 break;
                             case 2:
-                                routedetail += "버스 ";
+                                routedetail += "\n버스\n-> ";
                                 break;
                             default:
-                                routedetail += "도보 ";
+                                routedetail += "\n도보\n-> ";
                                 break;
                         }
 // 버스 또는 지하철 이동시에만
                         if(Type == 1 || Type ==2){
-                            String startName = subPathOBJ.getString("startName"); // 출발지
+                            String startName = subPathOBJ.getString("startName"); // 승차정류장
                             routedetail += startName+" 에서 ";
-                            String endName = subPathOBJ.getString("endName"); // 도착지
-                            routedetail += endName;
+                            String endName = subPathOBJ.getString("endName"); // 하차정류장
+                            routedetail += endName+" ";
 // 버스및 지하철 정보 가져옴 (정보가 많으므로 array로 가져오기)
                             JSONArray laneObj = subPathOBJ.getJSONArray("lane");
                             if(Type == 1 ){ // 지하철
                                 String subwayName = laneObj.getJSONObject(0).getString("name"); // 지하철 정보(몇호선)
-                                routedetail += subwayName+" 탑승 ";
+                                String subwaycode = laneObj.getJSONObject(0).getString("subwayCode"); // 지하철 노선번호
+                                routedetail += subwayName + "["+ subwaycode +"]" + "번 지하철 탑승 ";
                             }
                             if(Type == 2 ) { // 버스..
                                 String busNo = laneObj.getJSONObject(0).getString("busNo"); // 버스번호정보
-                                String busroute = " ["+busNo+ "] 번 탑승 ";
+                                String busroute = " ["+busNo+ "] 번 버스 탑승 ";
                                 routedetail += busroute;
                                 busID = laneObj.getJSONObject(0).getInt("busID"); // 버스정류장 id
                             }
                         }
                         int distance = subPathOBJ.getInt("distance"); // 이동길이
-                        routedetail += "\n( "+Integer.toString(distance)+"m 이동. ";
+                        routedetail += Integer.toString(distance)+"m 이동 (";
                         int sectionTime = subPathOBJ.getInt("sectionTime"); // 이동시간
-                        routedetail += Integer.toString(sectionTime)+"분 소요 )\n";
+                        routedetail += Integer.toString(sectionTime)+"분 소요)\n";
                         totalTime += sectionTime ;
 ////////////////////////////////////////////////////////////addlist 넣기!!! 한줄마다 listview설정하기
                     } // 세부경로 종료
-                    routedetail += "\n총" + Integer.toString(totalTime) + "분 소요\n " ;
+
+                    routedetail += "\n\n총 " + Integer.toString(totalTime) + "분 소요됩니다.  감사합니다^^\n----------------------------------------------------------------------------- \n\n" ;
 // api 경로 좌표 요청
+
                     OdsayAPiroute(mapObj);
 // 화면에 버스 및 지하철 경로 출력
                     Dialogview();

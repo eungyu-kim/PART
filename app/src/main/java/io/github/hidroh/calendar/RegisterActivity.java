@@ -49,13 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
         adapter = ArrayAdapter.createFromResource(this, R.array.age, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        TextView Title = (TextView) findViewById(R.id.title);
-
-        // 타이틀글꼴 변경
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "NanumPen.ttf");
-        Title.setTypeface(typeface);
-        Title.append("회원 가입");
-
         final EditText idText = (EditText) findViewById(R.id.idText);
         final EditText passwordText = (EditText) findViewById(R.id.passwordText);
         final EditText passwordokText = (EditText) findViewById(R.id.passwordokText);

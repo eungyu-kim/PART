@@ -69,8 +69,8 @@ public class ATFindCurrentLocation extends AsyncTask<Void, Integer, AddressAndPo
             doInBackground에서는 에서 뷰 작업이 필요하다면 publishProgress를 통해 onProgressUpdate를 호출하여 수행하여야 한다
 
          */
-        ((TextView) f_rlCover.findViewById(R.id.activity_main_tv_cover_command)).setText("FIND CURRENT LOCATION");
-        ((TextView) f_rlCover.findViewById(R.id.activity_main_tv_cover_total)).setText((TIME_OUT / 1000) + " sec");
+        ((TextView) f_rlCover.findViewById(R.id.activity_main_tv_cover_command)).setText("장소를 찾는 중입니다. 잠시만 기다려 주세요");
+        ((TextView) f_rlCover.findViewById(R.id.activity_main_tv_cover_total)).setText((TIME_OUT / 1000) + " sec 로딩중..");
         f_rlCover.setVisibility(View.VISIBLE);
     }
 
@@ -105,7 +105,6 @@ public class ATFindCurrentLocation extends AsyncTask<Void, Integer, AddressAndPo
 
         /*
             getLocation 은 위도, 경도 값만 줍니다
-            이것만 가지고는 마커를 생성할수가 없어요 ㅠ
 
             그래서 이 위도 경도를 가지고 주소를 찾아야 합니다
          */

@@ -160,7 +160,7 @@
         </ViewFlipper>
     </LinearLayout>
 
-    
+
     <LinearLayout
         android:id="@+id/travelcourse"
         android:layout_width="match_parent"
