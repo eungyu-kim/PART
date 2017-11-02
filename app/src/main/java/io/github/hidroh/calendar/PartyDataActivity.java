@@ -24,80 +24,76 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by kug00 on 2017-11-01.
+ * Created by kug00 on 2017-11-03.
  */
 
-public class LeisureActivity extends AppCompatActivity {
+public class PartyDataActivity extends AppCompatActivity {
+    //JSON에서 목록을 만들기위한 배열
+    private static final String Detail_SID="contentid", Detail_Title = "title", Detail_address = "addr1", party_Image = "firstimage"
+            ,Overview = "overview",EventStart = "eventstartdate", EventEnd="eventenddate",Eventplace = "eventplace";
 
-    TextView leisure_title, leisure_addr, leisure_intro, TextView_leisure_Infocenter, TextView_leisure_parking, TextView_Restdateleports,
-             openperiod, TextView_Usetimeleports;
+    TextView Party_title, Party_addr, Party_intro, TextView_party_EventStart, TextView_party_EventEnd, TextView_party_eventplace;
+
+    String Party_contentId;
 
     //숙박 정보 소개 가져오기
-    String leisure_Intro_Data, leisure_Data;
+    String Hotel_Intro_Data, Hotel_Data;
     //숙박 정보를 담기위한 해쉬 리스트 선언
-    ArrayList<HashMap<String, String>> leisure_S_ListHash;
-    //받는 정보 분류
-    int contentTypeId;
-    //JSON에서 목록을 만들기위한 배열
-    private static final String Detail_SID="contentid", Detail_Title = "title", Detail_address = "addr1", Detail_Image = "firstimage"
-            ,Overview = "overview",Infocenter = "infocenterleports", Parking = "parkingleports",Restdateleports = "restdateleports"
-            ,Usetimeleports = "usetimeleports",Openperiod = "openperiod";
-
-    String leisure_contentId;
-
+    ArrayList<HashMap<String, String>> Party_S_ListHash;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leisure);
+        setContentView(R.layout.partydata);
 
-        //아이디 찾기
-        leisure_title = (TextView)findViewById(R.id.leisure_title);
-        leisure_addr = (TextView)findViewById(R.id.leisure_addr);
-        leisure_intro = (TextView)findViewById(R.id.leisure_intro);
-        TextView_leisure_Infocenter = (TextView)findViewById(R.id.TextView_leisure_Infocenter);
-        TextView_leisure_parking = (TextView)findViewById(R.id.TextView_leisure_parking);
-        TextView_Restdateleports = (TextView)findViewById(R.id.TextView_Restdateleports);
-        TextView_Usetimeleports = (TextView)findViewById(R.id.TextView_Usetimeleports);
-        openperiod = (TextView)findViewById(R.id.openperiod);
+        Party_title = (TextView)findViewById(R.id.party_title) ;
+        Party_addr = (TextView)findViewById(R.id.partyl_addr);
+        Party_intro = (TextView)findViewById(R.id.party_intro);
+        TextView_party_EventStart = (TextView)findViewById(R.id.TextView_party_EventStart);
+        TextView_party_EventEnd = (TextView)findViewById(R.id.TextView_party_EventEnd);
+        TextView_party_eventplace = (TextView)findViewById(R.id.TextView_party_eventplace);
 
         //지역정보를 저장하기 위한
-        leisure_S_ListHash = new ArrayList<HashMap<String, String>>();
+        Party_S_ListHash = new ArrayList<HashMap<String, String>>();
 
         //정보 전달 받기
         Intent it = getIntent();
-
-        //컨텐츠 ID 받기
-        contentTypeId = it.getIntExtra("It_ContentTypeId",contentTypeId);
-        //Log.d("ListView","contentTypeId:"+contentTypeId);
-
 
         //해쉬맵 가져오기
         HashMap<String,String> DetailHash;
         DetailHash = (HashMap<String,String>)it.getSerializableExtra("DetailHash");
 
         //Id 얻기
-        leisure_contentId = DetailHash.get(Detail_SID);
+        Party_contentId = DetailHash.get(Detail_SID);
         //Log.d("ListView","Food_contentId:"+Food_contentId);
 
         //타이틀 얻기
         String Food_title = DetailHash.get(Detail_Title);
         //Log.d("ListView","Food_title:"+Food_title);
-        leisure_title.setText(Food_title);
+        Party_title.setText(Food_title);
 
         //주소 얻기
         String Food_addr = DetailHash.get(Detail_address);
         //Log.d("ListView","address:"+Food_addr);
-        leisure_addr.setText(Food_addr);
+        Party_addr.setText(Food_addr);
 
         //이미지 얻기
-        String detail_img = DetailHash.get(Detail_Image);
+        String detail_img = DetailHash.get(party_Image);
         //Log.d("ListView","address:"+detail_img);
         // 아이템 내 각 위젯에 데이터 반영, 피카소 이용해 url 주소 이미지 넣기
         Picasso.with(this)
                 .load(detail_img)
-                .into((ImageView)findViewById(R.id.leisure_img));
+                .into((ImageView)findViewById(R.id.party_img));
 
-        getData(LeisueIntroURL());
+        //행사기간 얻기
+        String EventStartValue = DetailHash.get(EventStart);
+        //Log.d("ListView","address:"+Food_addr);
+        TextView_party_EventStart.setText(EventStartValue);
+
+        String EventEndValue = DetailHash.get(EventEnd);
+        //Log.d("ListView","address:"+Food_addr);
+        TextView_party_EventEnd.setText(EventEndValue);
+
+        getData(ParyIntroURL());
         IntroData(IntroURL());
     }
 
@@ -123,7 +119,7 @@ public class LeisureActivity extends AppCompatActivity {
             }
             @Override
             protected void onPostExecute(String result) {
-                leisure_Intro_Data=result;
+                Hotel_Intro_Data=result;
                 showList();
             }
         }
@@ -137,7 +133,7 @@ public class LeisureActivity extends AppCompatActivity {
             //Log.d("Result","Detaildata 전체데이터출력 : "+Food_Intro_Data);
 
             //Json data -> JsonOject 변환
-            JSONObject jsonObj = new JSONObject(leisure_Intro_Data);
+            JSONObject jsonObj = new JSONObject(Hotel_Intro_Data);
             //JsonObject -> 하위 JsonObject Get
             String response = jsonObj.getString("response");
             //Log.d("Result","response 결과"+response);
@@ -160,16 +156,16 @@ public class LeisureActivity extends AppCompatActivity {
             if(jsonvalue.has(Overview))
                 OverviewValue = jsonvalue.getString(Overview);
             //Log.d("Result","Overview 결과"+OverviewValue);
-            leisure_intro.setText(Html.fromHtml(OverviewValue));
+            Party_intro.setText(Html.fromHtml(OverviewValue));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-    protected String LeisueIntroURL() {
+    protected String ParyIntroURL() {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=" + servicekey;
-        String mid="&contentTypeId="+contentTypeId+"&contentId=" + leisure_contentId;
+        String mid="&contentTypeId=15&contentId=" + Party_contentId;
         String last="&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y&_type=json";
         String data  = first  + mid  + last;
         return data;
@@ -179,7 +175,7 @@ public class LeisureActivity extends AppCompatActivity {
     protected String IntroURL() {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=" + servicekey;
-        String mid="&contentTypeId="+contentTypeId+"&contentId=" + leisure_contentId;
+        String mid="&contentTypeId=15&contentId=" + Party_contentId;
         String last="&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&introYN=Y&_type=json";
         String data  = first  + mid  + last;
         return data;
@@ -208,7 +204,7 @@ public class LeisureActivity extends AppCompatActivity {
             }
             @Override
             protected void onPostExecute(String result) {
-                leisure_Data=result;
+                Hotel_Data=result;
                 IntroShow();
             }
         }
@@ -216,13 +212,13 @@ public class LeisureActivity extends AppCompatActivity {
         g.execute(url);
     }
 
-    protected void IntroShow() {
+    protected void IntroShow(){
         try {
             //전체 데이터 출력 Detaildata json으로 파싱 받은 데이터가 String 형식으로 되있다.
             //Log.d("Result","Introdata 전체데이터출력 : "+Introdata);
 
             //Json data -> JsonOject 변환
-            JSONObject jsonObj = new JSONObject(leisure_Data);
+            JSONObject jsonObj = new JSONObject(Hotel_Data);
             //JsonObject -> 하위 JsonObject Get
             String response = jsonObj.getString("response");
             //Log.d("Result","response 결과"+response);
@@ -240,46 +236,13 @@ public class LeisureActivity extends AppCompatActivity {
             //Log.d("Result","item 결과"+item);
 
             JSONObject jsonvalue = new JSONObject(item);
-            //문의 안내 정보
-            String InfocenterValue = "문의 및 안내 정보가 없습니다.";
-            if (jsonvalue.has(Infocenter))
-                InfocenterValue = jsonvalue.getString(Infocenter);
-            Log.d("Result","Infocenter 결과"+InfocenterValue);
-            if (!InfocenterValue.equals(""))
-                TextView_leisure_Infocenter.setText(Html.fromHtml(InfocenterValue));
-
-            //주차 시설 정보
-            String ParkingValue = "주차시설 정보가 없습니다.";
-            if (jsonvalue.has(Parking))
-                ParkingValue = jsonvalue.getString(Parking);
-            Log.d("Result","Parking 결과"+ParkingValue);
-            if (!ParkingValue.equals(""))
-                TextView_leisure_parking.setText(Html.fromHtml(ParkingValue));
-
-            //휴일 정보
-            String RestdateleportsValue = "휴일 정보가 없습니다.";
-            if (jsonvalue.has(Restdateleports))
-                RestdateleportsValue = jsonvalue.getString(Restdateleports);
-            Log.d("Result","Parking 결과"+RestdateleportsValue);
-            if (!RestdateleportsValue.equals(""))
-                TextView_Restdateleports.setText(Html.fromHtml(RestdateleportsValue));
-
-            //이용 시간 정보
-            String UsetimeleportsValue = "이용 시간 정보가 없습니다.";
-            if (jsonvalue.has(Usetimeleports))
-                UsetimeleportsValue = jsonvalue.getString(Usetimeleports);
-            Log.d("Result","Parking 결과"+UsetimeleportsValue);
-            if (!UsetimeleportsValue.equals(""))
-                TextView_Usetimeleports.setText(Html.fromHtml(UsetimeleportsValue));
-
-            //개장 기간 정보
-            String OpenperiodsValue = "개장 기간 정보가 없습니다.";
-            if (jsonvalue.has(Openperiod))
-                OpenperiodsValue = jsonvalue.getString(Openperiod);
-            Log.d("Result","Parking 결과"+OpenperiodsValue);
-            if (!OpenperiodsValue.equals(""))
-                openperiod.setText(Html.fromHtml(OpenperiodsValue));
-
+            //이벤트 장소 정보
+            String EventplaceValue = "이벤트 장소 정보가 없습니다.";
+            if(jsonvalue.has(Eventplace))
+                EventplaceValue = jsonvalue.getString(Eventplace);
+            //Log.d("Result","Infocenter 결과"+EventplaceValue);
+            if (!EventplaceValue.equals(""))
+                TextView_party_eventplace.setText(Html.fromHtml(EventplaceValue));
 
         } catch (JSONException e) {
             e.printStackTrace();

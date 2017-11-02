@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -49,7 +50,7 @@ public class LocalSearchActivity extends AppCompatActivity {
     String MainCategory, MiddleCategory;
     boolean lastitemVisibleFlag = false;		//화면에 리스트의 마지막 아이템이 보여지는지 체크
     //받은정보 데이터 페이지 카운터
-    int Contentcount=1, maxcount =0;
+    int Contentcount=1, maxcount =0, countValue = 0;
     //받는 정보 분류
     int contentTypeId=12;
     @Override
@@ -75,6 +76,8 @@ public class LocalSearchActivity extends AppCompatActivity {
         //레포츠 정보를 저장하기 위한 ArrayList
         Leisure_S_ListHash = new ArrayList<HashMap<String, String>>();
 
+        final ProgressBar party_progressBar = (ProgressBar)findViewById(R.id.Local_progressBar);
+
         //지역 정보를 커스텀  listView와 연결하기 위한 어뎁터
         adapter = new LocalListViewAdapter();
 
@@ -92,7 +95,7 @@ public class LocalSearchActivity extends AppCompatActivity {
         Intent it = getIntent();
         MainCategory = it.getStringExtra("areaCode");
         MiddleCategory = it.getStringExtra("sigunguCode");
-        getData(CreateURL(MainCategory,MiddleCategory));
+        getData(CreateURL(MainCategory,MiddleCategory),1);
 
         //맛집 버튼을 눌렀을 때
         Restaurant.setOnClickListener(new View.OnClickListener() {
@@ -102,10 +105,11 @@ public class LocalSearchActivity extends AppCompatActivity {
                 count = adapter.getCount() ;
                 contentTypeId = 39;
                 Contentcount=1;
+                countValue = 0;
                 if (count > 0) {
                         // listview 데이터 삭제
                         adapter.removeall();
-                        getData(CreateURL(MainCategory,MiddleCategory));
+                        getData(CreateURL(MainCategory,MiddleCategory),1);
                         Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -119,10 +123,11 @@ public class LocalSearchActivity extends AppCompatActivity {
                 count = adapter.getCount() ;
                 contentTypeId =12;
                 Contentcount=1;
+                countValue = 0;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
+                    getData(CreateURL(MainCategory,MiddleCategory),1);
                     Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -136,10 +141,11 @@ public class LocalSearchActivity extends AppCompatActivity {
                 count = adapter.getCount() ;
                 contentTypeId = 28;
                 Contentcount=1;
+                countValue = 0;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
+                    getData(CreateURL(MainCategory,MiddleCategory),1);
                     Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -153,10 +159,11 @@ public class LocalSearchActivity extends AppCompatActivity {
                 count = adapter.getCount() ;
                 contentTypeId = 32;
                 Contentcount=1;
+                countValue = 0;
                 if (count > 0) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory));
+                    getData(CreateURL(MainCategory,MiddleCategory),1);
                     Locla_S_List.setAdapter(adapter);
                 }
             }
@@ -174,9 +181,13 @@ public class LocalSearchActivity extends AppCompatActivity {
                     int count = adapter.getCount();
                     // 아이템 추가.
                     //items.add("LIST" + Integer.toString(count + 1));
-                    getData(CreateURL(MainCategory,MiddleCategory));
+                    //프로그레스 생성
+                    party_progressBar.setVisibility(view.VISIBLE);
                     // listview 갱신
-                    //adapter.notifyDataSetChanged();
+                    getData(CreateURL(MainCategory,MiddleCategory),2);
+                    //프로그레스 없앰
+                    party_progressBar.setVisibility(view.GONE);
+
                 }
             }
 
@@ -278,12 +289,14 @@ public class LocalSearchActivity extends AppCompatActivity {
         }) ;
     }
 
-    public void getData(String url){
+    public void getData(String url, final int update){
         class GetDataJSON extends AsyncTask<String, Void, String> {
+            int Udate;
             @Override
             protected String doInBackground(String... params) {
                 String uri = params[0];
                 BufferedReader bufferedReader = null;
+                Udate = update;
                 try {
                     URL url = new URL(uri);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -301,14 +314,14 @@ public class LocalSearchActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 localsearchdata=result;
-                showList();
+                showList(Udate);
             }
         }
         GetDataJSON g = new GetDataJSON();
         g.execute(url);
     }
 
-    protected void showList(){
+    protected void showList(int update){
         try {
             //전체 데이터 출력 localsearchdata json으로 파싱 받은 데이터가 String 형식으로 되있다.
             //Log.d("Result","localsearchdata 전체데이터출력 : "+localsearchdata);
@@ -328,10 +341,16 @@ public class LocalSearchActivity extends AppCompatActivity {
             //Log.d("Result","items 결과"+items);
 
             //페이지 최대값
-            String numOfRows = Body.getString("numOfRows");
-            maxcount = Integer.parseInt(numOfRows);
-            if (Contentcount<maxcount)
+            String totalCount = Body.getString("totalCount");
+            Log.d("Result","totalCount 결과"+totalCount);
+            Log.d("Result","countValue 결과"+countValue);
+            maxcount = Integer.parseInt(totalCount);
+            if (countValue<=maxcount)
                 Contentcount++;
+            if (countValue>=maxcount){
+                Toast.makeText(LocalSearchActivity.this, "마지막 목록입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             JSONObject Item = new JSONObject(items);
             String item = Item.getString("item");
@@ -342,6 +361,7 @@ public class LocalSearchActivity extends AppCompatActivity {
 
             //JSONArray 길이만큼 반복
             for(int i=0;i<ItemArray.length();i++){
+                countValue++;
                 JSONObject c =ItemArray.getJSONObject(i);
                 String contentid = c.getString(Locla_SID);
                 //Log.d("Result","contentid 결과"+contentid);
@@ -400,9 +420,14 @@ public class LocalSearchActivity extends AppCompatActivity {
                 // 아이템 추가.
                 adapter.addItem(firstimage, title, addr1) ;
             }
-            //행사정보 어댑터 리스트 뷰에 달기
-            Locla_S_List.setAdapter(adapter);
-            //Log.d("Result","data 결과"+CreateURL());
+            if (update == 1) {
+                //행사정보 어댑터 리스트 뷰에 달기
+                Locla_S_List.setAdapter(adapter);
+                //Log.d("Result","data 결과"+CreateURL());
+            }
+            if (update == 2) {
+                adapter.notifyDataSetChanged();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

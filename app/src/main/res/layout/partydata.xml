@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/leisure_img"
+        android:id="@+id/party_img"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:srcCompat="@color/blue50"
@@ -41,23 +41,24 @@
                 android:layout_margin="3dp">
 
                 <TextView
-                    android:id="@+id/leisure_title"
+                    android:id="@+id/party_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
                     android:text="제목"
-                    android:textSize="20sp"
+                    android:textColor="#c71585"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="15dp"/>
                 <TextView
-                    android:id="@+id/leisure_addr"
+                    android:id="@+id/partyl_addr"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
                     android:text="주소 : "
-                    android:textSize="13sp"
-                    android:layout_marginLeft="10dp"/>
+                    android:textSize="16sp"
+                    android:layout_marginLeft="20dp"/>
 
             </LinearLayout>
 
@@ -88,14 +89,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="소개"
+                        android:text="소 개"
+                        android:textColor="@color/thema"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
+                        />
 
                     <TextView
-                        android:id="@+id/leisure_intro"
+                        android:id="@+id/party_intro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -106,95 +109,64 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="문의 및 안내"
+                        android:text="행사 기간"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
+                        android:textColor="@color/thema"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp" />
 
-                    <TextView
-                        android:id="@+id/TextView_leisure_Infocenter"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="문의 및 안내가 없습니다."
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/TextView_party_EventStart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="15dp"
+                            android:text="행사 기간 정보가 없습니다."
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="15dp"
+                            android:text="~"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/TextView_party_EventEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="15dp"
+                            android:text=""
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="주차시설"
+                        android:text="행사 장소"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
+                        android:textColor="@color/thema"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/TextView_leisure_parking"
+                        android:id="@+id/TextView_party_eventplace"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="주차시설 정보가 없습니다."
+                        android:text="이벤트 장소 정보가 없습니다."
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="휴일"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/TextView_Restdateleports"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="휴일 정보가 없습니다."
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="이용 시간"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/TextView_Usetimeleports"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="이용 시간 정보가 없습니다."
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="개장 기간"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20sp" />
-
-                    <TextView
-                        android:id="@+id/openperiod"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="개장 기간 정보가 없습니다."
-                        android:textSize="15sp" />
 
                 </LinearLayout>
             </ScrollView>
-
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

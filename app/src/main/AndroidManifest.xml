@@ -45,6 +45,7 @@
         <activity android:name=".FoodActivity"/>
         <activity android:name=".LeisureActivity"/>
         <activity android:name=".HotelActivity"/>
+        <activity android:name=".PartyDataActivity"/>
 
     </application>
 

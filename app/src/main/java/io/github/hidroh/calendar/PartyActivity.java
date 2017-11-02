@@ -8,11 +8,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,12 +40,19 @@ public class PartyActivity extends AppCompatActivity {
     private static final String PartyID="contentid", Title = "title", address = "addr1",
             Image = "firstimage", EventStart = "eventstartdate", EventEnd="eventenddate";
 
+    boolean isLastItem = false;		//화면에 리스트의 마지막 아이템이 보여지는지 체크
+
+    //받은정보 데이터 페이지 카운터
+    int Contentcount=1, maxcount =0, countValue = 0, contentTypeId=12;
+
     //행사 정보를 담기위한 해쉬 리스트 선언
     ArrayList<HashMap<String, String>> PartyListHash;
     //행사정보를 표현하는 리스트 뷰 선언
     ListView PartyList;
     //여행 리스트뷰 어댑터 선언
     PartyAdapter adapter;
+    //이벤트 시작 시간
+    String eventStartDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,10 +70,12 @@ public class PartyActivity extends AppCompatActivity {
 
         //아이디 찾기
         ImageButton GoMain = (ImageButton)findViewById(R.id.gomain);
-        TextView Time = (TextView)findViewById(R.id.time);
+
         TextView TMonth1 = (TextView)findViewById(R.id.tmonth1);
         TextView TMonth2 = (TextView)findViewById(R.id.tmonth2);
         PartyList = (ListView)findViewById(R.id.partylist);
+
+        final ProgressBar party_progressBar = (ProgressBar)findViewById(R.id.party_progressBar);
 
         //행사 정보를 담기위한 해쉬 리스트 생성
         PartyListHash = new ArrayList<HashMap<String,String>>();
@@ -82,29 +94,13 @@ public class PartyActivity extends AppCompatActivity {
         TMonth1.setText(time.getTime(1));
         TMonth2.setText(time.getTime(1));
 
-        //현재시간 출력
-        Time.setText(time.getTime(0));
+        //이벤트 시작시간 설정
+        eventStartDate = time.getTime(2);
 
         //여행 리스트뷰 어댑터 생성
         adapter = new PartyAdapter();
 
-        // 위에서 생성한 listview에 클릭 이벤트 핸들러 정의.
-        PartyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                PartyListViewItem item = (PartyListViewItem) parent.getItemAtPosition(position) ;
-
-                String titleStr = item.getTitle() ;
-                String descStr = item.getDesc() ;
-                String iconDrawable = item.getIcon() ;
-
-                // TODO : use item data.
-            }
-        }) ;
-
-
-        getData("http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D&eventStartDate=20171017&eventEndDate=&areaCode=&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1&_type=json");
+        getData(CreateURL(),1);
         //피카소 연습
         //ImageView imageView = (ImageView) findViewById(R.id.imageView00);
         /*Picasso.with(this)
@@ -113,13 +109,66 @@ public class PartyActivity extends AppCompatActivity {
 
         //Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageView);
 
+        //리스트뷰 바닥에 닿았을 때
+        PartyList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                //OnScrollListener.SCROLL_STATE_IDLE은 스크롤이 이동하다가 멈추었을때 발생되는 스크롤 상태입니다.
+                //즉 스크롤이 바닦에 닿아 멈춘 상태에 처리를 하겠다는 뜻
+
+                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && isLastItem) {
+                    //TODO 화면이 바닦에 닿을때 처리
+                    int count = adapter.getCount();
+                    //프로그레스 생성
+                    party_progressBar.setVisibility(view.VISIBLE);
+                    // listview 갱신
+                    getData(CreateURL(),2);
+                    //프로그레스 없앰
+                    party_progressBar.setVisibility(view.GONE);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //현재 화면에 보이는 첫번째 리스트 아이템의 번호(firstVisibleItem) + 현재 화면에 보이는 리스트 아이템의 갯수(visibleItemCount)가 리스트 전체의 갯수(totalItemCount) -1 보다 크거나 같을때
+                //마지막 위치이면, isLastItem에 true가 들어감
+                isLastItem = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
+            }
+        });
+
+        //리스트 뷰 클릭시 이벤트
+        PartyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // get item
+                //LocalListViewItem item = (LocalListViewItem) parent.getItemAtPosition(position) ;
+
+                Intent it = new Intent(PartyActivity.this, PartyDataActivity.class);
+
+                //클릭 위치 출력
+                // Log.d("ListView","position:"+position);
+
+                //해쉬맵 가져오기
+                HashMap<String, String> DetailHash;
+                DetailHash = PartyListHash.get(position);
+
+                //해쉬맵 넘기기
+                it.putExtra("DetailHash", DetailHash);
+                //다음 화면으로
+                startActivity(it);
+            }
+        }) ;
     }
-    public void getData(String url){
+
+
+    public void getData(String url, final int update){
         class GetDataJSON extends AsyncTask<String, Void, String> {
+            int updatevalue;
             @Override
             protected String doInBackground(String... params) {
                 String uri = params[0];
                 BufferedReader bufferedReader = null;
+                updatevalue = update;
                 try {
                     URL url = new URL(uri);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -137,14 +186,14 @@ public class PartyActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 partydata=result;
-                showList();
+                showList(updatevalue);
             }
         }
         GetDataJSON g = new GetDataJSON();
         g.execute(url);
     }
 
-    protected void showList(){
+    protected void showList(int update){
         try {
             //전체 데이터 출력 partydata는 json으로 파싱 받은 데이터가 String 형식으로 되있다.
             Log.d("Result","partydata 전체데이터출력 : "+partydata);
@@ -160,6 +209,17 @@ public class PartyActivity extends AppCompatActivity {
             Log.d("Result","body 결과"+body);
 
             JSONObject Body = new JSONObject(body);
+
+            //페이지 최대값
+            String totalCount = Body.getString("totalCount");
+            Log.d("Result","totalCount 결과"+totalCount);
+            maxcount = Integer.parseInt(totalCount);
+            if (countValue<=maxcount)
+                Contentcount++;
+            if (countValue>=maxcount){
+                Toast.makeText(PartyActivity.this, "마지막 목록입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String items = Body.getString("items");
             Log.d("Result","items 결과"+items);
 
@@ -172,6 +232,7 @@ public class PartyActivity extends AppCompatActivity {
 
             //JSONArray 길이만큼 반복
             for(int i=0;i<ItemArray.length();i++){
+                countValue++;
                 JSONObject c =ItemArray.getJSONObject(i);
                 String contentid = c.getString(PartyID);
                 //Log.d("Result","contentid 결과"+contentid);
@@ -204,9 +265,24 @@ public class PartyActivity extends AppCompatActivity {
                 adapter.addItem(firstimage, title, addr1, eventstartdate, eventenddate) ;
             }
             //행사정보 어댑터 리스트 뷰에 달기
-            PartyList.setAdapter(adapter);
+            if (update == 1) {
+                PartyList.setAdapter(adapter);
+            }
+            if (update == 2) {
+                adapter.notifyDataSetChanged();
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    protected String CreateURL() {
+        String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
+        String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=" + servicekey;
+        String mid="&eventStartDate="+eventStartDate+"&eventEndDate=&areaCode=&sigunguCode=";
+        String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+Contentcount+"&_type=json";
+        String data  = first  + mid  + last;
+        return data;
     }
 }

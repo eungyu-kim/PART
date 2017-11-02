@@ -65,4 +65,10 @@
         android:layout_height="0dp"
         android:layout_weight="0.8"
         android:id="@+id/search_list"/>
+    <ProgressBar
+        android:id="@+id/Local_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 </LinearLayout>

@@ -95,12 +95,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </ListView>
-
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="현재시간" />
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/party_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

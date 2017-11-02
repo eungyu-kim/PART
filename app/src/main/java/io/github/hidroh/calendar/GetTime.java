@@ -15,6 +15,7 @@ public class GetTime {
     SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
     SimpleDateFormat mFormat = new SimpleDateFormat("MM");
     SimpleDateFormat kFormat = new SimpleDateFormat("yyyy년MM월dd일");
+    SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyyMMdd");
 
     //파라미터에 따라 0일때 전체 일자 1일때 월 출력
     public String getTime(int x){
@@ -24,6 +25,8 @@ public class GetTime {
             return Format.format(mDate);
         else if (x==1)
             return mFormat.format(mDate);
+        else if (x==2)
+            return ymdFormat.format(mDate);
         else
             return "현재일자를 받지 못했습니다.";
     }
