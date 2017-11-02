@@ -69,14 +69,8 @@
         android:layout_height="wrap_content" />
 
     <View
-        android:id="@+id/row2"
-        android:layout_below="@id/row1"
-        android:layout_width="0dp"
-        android:layout_height="?attr/listPreferredItemHeight" />
-
-    <View
         android:id="@+id/row3"
-        android:layout_below="@id/row2"
+        android:layout_below="@id/row1"
         android:layout_width="0dp"
         android:layout_height="?attr/listPreferredItemHeight" />
 
@@ -103,49 +97,6 @@
         android:layout_width="0dp"
         android:layout_height="?attr/listPreferredItemHeight" />
 
-    <!-- Row 2 ALL_DAY 부분... 메모하는 곳으로 바꾸기
-    <ImageView
-        app:srcCompat="@drawable/ic_access_time_white_24dp"
-        tools:src="@drawable/ic_access_time_white_24dp"
-        android:tint="?android:attr/textColorTertiary"
-        android:scaleType="center"
-        android:contentDescription="@string/event_time"
-        android:layout_alignTop="@id/row2"
-        android:layout_alignBottom="@id/row2"
-        android:layout_alignLeft="@id/column1"
-        android:layout_alignStart="@id/column1"
-        android:layout_alignRight="@id/column1"
-        android:layout_alignEnd="@id/column1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingPrefix" />
-
-    <TextView
-        android:id="@+id/text_view_all_day"
-        android:text="@string/all_day"
-        style="@style/Widget.AppTheme.EventEditView.TextView.Selectable"
-        android:layout_alignTop="@id/row2"
-        android:layout_alignBottom="@id/row2"
-        android:layout_alignLeft="@id/column2"
-        android:layout_alignStart="@id/column2"
-        android:layout_alignRight="@id/column2"
-        android:layout_alignEnd="@id/column2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <android.support.v7.widget.SwitchCompat
-        android:id="@+id/switch_all_day"
-        style="@style/Widget.AppTheme.EventEditView"
-        android:layout_alignTop="@id/row2"
-        android:layout_alignBottom="@id/row2"
-        android:layout_alignLeft="@id/column3"
-        android:layout_alignStart="@id/column3"
-        android:layout_alignRight="@id/column3"
-        android:layout_alignEnd="@id/column3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />-->
-
-    <!-- Row 3 -->
     <TextView
         android:id="@+id/text_view_start_date"
         tools:text="Friday, Mar 18th"
@@ -230,6 +181,5 @@
         android:layout_alignEnd="@id/column3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
 
 </merge>

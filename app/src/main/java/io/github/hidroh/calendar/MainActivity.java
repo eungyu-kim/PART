@@ -366,8 +366,9 @@ public class MainActivity extends AppCompatActivity {
         GoMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(it);
+                //Intent it = new Intent(MainActivity.this, LoginActivity.class);
+                //startActivity(it);
+                Toast.makeText(MainActivity.this, "준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
