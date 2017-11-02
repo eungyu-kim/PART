@@ -99,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="소개정보가 없습니다."
                         android:textSize="15sp" />
 
                     <TextView
@@ -113,11 +113,11 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Infocenter"
+                        android:id="@+id/TextView_leisure_Infocenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="문의 및 안내가 없습니다."
                         android:textSize="15sp" />
 
                     <TextView
@@ -131,7 +131,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_parking"
+                        android:id="@+id/TextView_leisure_parking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -149,11 +149,47 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Restdate"
+                        android:id="@+id/TextView_Restdateleports"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
                         android:text="휴일 정보가 없습니다."
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="이용 시간"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/Usetimeleports"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="이용 시간 정보가 없습니다."
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="개장 기간"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/openperiod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="개장 기간 정보가 없습니다."
                         android:textSize="15sp" />
 
                 </LinearLayout>

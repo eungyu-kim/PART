@@ -242,14 +242,14 @@ public class LocalSearchActivity extends AppCompatActivity {
                     // Log.d("ListView","position:"+position);
 
                     //컨텐츠 ID 넣기
-                    /*food_it.putExtra("It_ContentTypeId", contentTypeId);
+                    Leisure_it.putExtra("It_ContentTypeId", contentTypeId);
 
                     //해쉬맵 가져오기
                     HashMap<String, String> DetailHash;
-                    DetailHash = Locla_S_ListHash.get(position);
+                    DetailHash = Leisure_S_ListHash.get(position);
 
                     //해쉬맵 넘기기
-                    food_it.putExtra("DetailHash", DetailHash);*/
+                    Leisure_it.putExtra("DetailHash", DetailHash);
                     //다음 화면으로
                     startActivity(Leisure_it);
                 }
