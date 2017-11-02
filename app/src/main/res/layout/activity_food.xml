@@ -99,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="소개정보가 없습니다."
                         android:textSize="15sp" />
 
                     <TextView
@@ -113,11 +113,47 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Infocenter"
+                        android:id="@+id/food_Infocenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="소개정보"
+                        android:text="문의 및 안내 정보가 없습니다."
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="대표 메뉴"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_firstmenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="대표 메뉴가 없습니다."
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="취급 메뉴"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textStyle="bold"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_Treatmenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="취급 메뉴 정보가 없습니다."
                         android:textSize="15sp" />
 
                     <TextView
@@ -131,7 +167,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_parking"
+                        android:id="@+id/food_parkingfood"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -149,7 +185,7 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Restdate"
+                        android:id="@+id/food_restdatefood"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -158,7 +194,6 @@
 
                 </LinearLayout>
             </ScrollView>
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

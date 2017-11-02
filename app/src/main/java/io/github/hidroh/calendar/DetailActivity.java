@@ -40,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     //받는 정보 분류
     int contentTypeId;
     String detail_contentId;
-    TextView TextView_intro, TextView_Infocenter, TextView_parking, TextView_Restdate, TextView_Expguide;
+    TextView TextView_intro, TextView_Infocenter, TextView_parking, TextView_Restdate;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -214,25 +214,25 @@ public class DetailActivity extends AppCompatActivity {
     protected void IntroShow(){
         try {
             //전체 데이터 출력 Detaildata json으로 파싱 받은 데이터가 String 형식으로 되있다.
-            Log.d("Result","Introdata 전체데이터출력 : "+Introdata);
+            //Log.d("Result","Introdata 전체데이터출력 : "+Introdata);
 
             //Json data -> JsonOject 변환
             JSONObject jsonObj = new JSONObject(Introdata);
             //JsonObject -> 하위 JsonObject Get
             String response = jsonObj.getString("response");
-            Log.d("Result","response 결과"+response);
+            //Log.d("Result","response 결과"+response);
 
             JSONObject Response = new JSONObject(response);
             String body = Response.getString("body");
-            Log.d("Result","body 결과"+body);
+            //Log.d("Result","body 결과"+body);
 
             JSONObject Body = new JSONObject(body);
             String items = Body.getString("items");
-            Log.d("Result","items 결과"+items);
+            //Log.d("Result","items 결과"+items);
 
             JSONObject Item = new JSONObject(items);
             String item = Item.getString("item");
-            Log.d("Result","item 결과"+item);
+            //Log.d("Result","item 결과"+item);
 
             JSONObject jsonvalue = new JSONObject(item);
             //문의 안내 정보
