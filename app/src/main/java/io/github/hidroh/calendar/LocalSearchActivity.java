@@ -39,7 +39,7 @@ public class LocalSearchActivity extends AppCompatActivity {
     private static final String Locla_SID="contentid", Title = "title", address = "addr1", Image = "firstimage";
 
     //지역 정보를 담기위한 해쉬 리스트 선언
-    ArrayList<HashMap<String, String>> Locla_S_ListHash, Food_S_ListHash;
+    ArrayList<HashMap<String, String>> Locla_S_ListHash, Food_S_ListHash, Hotel_S_ListHash, Leisure_S_ListHash;
 
     //지역정보를 저장하기 위한 표현하는 리스트 뷰 선언
     ListView Locla_S_List;
@@ -70,6 +70,10 @@ public class LocalSearchActivity extends AppCompatActivity {
         Locla_S_ListHash = new ArrayList<HashMap<String, String>>();
         //음식정보를 저장하기 위한 ArrayList
         Food_S_ListHash = new ArrayList<HashMap<String, String>>();
+        //숙박정보를 저장하기 위한 ArrayList
+        Hotel_S_ListHash = new ArrayList<HashMap<String, String>>();
+        //레포츠 정보를 저장하기 위한 ArrayList
+        Leisure_S_ListHash = new ArrayList<HashMap<String, String>>();
 
         //지역 정보를 커스텀  listView와 연결하기 위한 어뎁터
         adapter = new LocalListViewAdapter();
@@ -259,14 +263,14 @@ public class LocalSearchActivity extends AppCompatActivity {
                     // Log.d("ListView","position:"+position);
 
                     //컨텐츠 ID 넣기
-                    /*food_it.putExtra("It_ContentTypeId", contentTypeId);
+                    Leisure_it.putExtra("It_ContentTypeId", contentTypeId);
 
                     //해쉬맵 가져오기
                     HashMap<String, String> DetailHash;
-                    DetailHash = Locla_S_ListHash.get(position);
+                    DetailHash = Hotel_S_ListHash.get(position);
 
                     //해쉬맵 넘기기
-                    food_it.putExtra("DetailHash", DetailHash);*/
+                    Leisure_it.putExtra("DetailHash", DetailHash);
                     //다음 화면으로
                     startActivity(Leisure_it);
                 }
@@ -372,6 +376,26 @@ public class LocalSearchActivity extends AppCompatActivity {
                     FoodHash.put(address,addr1);
                     FoodHash.put(Image,firstimage);
                     Food_S_ListHash.add(FoodHash);
+                }
+
+                if (contentTypeId == 32) {
+                    //숙박 정보를 저장하기 위한 해쉬 생성
+                    HashMap<String, String> HotelHash = new HashMap<String, String>();
+                    HotelHash.put(Locla_SID,contentid);
+                    HotelHash.put(Title,title);
+                    HotelHash.put(address,addr1);
+                    HotelHash.put(Image,firstimage);
+                    Hotel_S_ListHash.add(HotelHash);
+                }
+
+                if (contentTypeId == 28) {
+                    //레포츠 정보를 저장하기 위한 해쉬 생성
+                    HashMap<String, String> Leisure = new HashMap<String, String>();
+                    Leisure.put(Locla_SID,contentid);
+                    Leisure.put(Title,title);
+                    Leisure.put(address,addr1);
+                    Leisure.put(Image,firstimage);
+                    Leisure_S_ListHash.add(Leisure);
                 }
                 // 아이템 추가.
                 adapter.addItem(firstimage, title, addr1) ;

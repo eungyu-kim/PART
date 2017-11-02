@@ -117,7 +117,7 @@
                         android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Infocenter"
+                        android:id="@+id/TextView_Hotel_Infocenter"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -136,7 +136,7 @@
                         android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/TextView_parking"
+                        android:id="@+id/TextView_Hotel_Parking"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
@@ -147,7 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="휴일"
+                        android:text="객실 유형"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textColor="@color/thema"
@@ -155,13 +155,50 @@
                         android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/TextView_Restdate"
+                        android:id="@+id/TextView_Hotel_Roomtype"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
-                        android:text="휴일 정보가 없습니다."
+                        android:text="객실 정보가 없습니다."
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="입실 시간"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/thema"
+                        android:textStyle="bold"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_checkintime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="입실 정보가 없습니다."
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="퇴실 시간"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/thema"
+                        android:textStyle="bold"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_checkouttime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:text="퇴실 정보가 없습니다."
+                        android:textSize="15sp" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
