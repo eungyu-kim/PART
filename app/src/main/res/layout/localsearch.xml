@@ -46,7 +46,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="관광지"
-            android:textSize="20sp" />
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:background="@color/blue700"/>
 
         <Button
             android:id="@+id/restaurant"
@@ -54,7 +56,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="맛집"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@color/blue700"/>
 
         <Button
             android:id="@+id/hotel"
@@ -62,7 +66,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="숙박"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@color/blue700"/>
 
         <Button
             android:id="@+id/ㅣeisure"
@@ -70,7 +76,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="레포츠"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@color/blue700" />
     </LinearLayout>
 
     <ListView
