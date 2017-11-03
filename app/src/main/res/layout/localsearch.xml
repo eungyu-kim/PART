@@ -12,52 +12,65 @@
             android:id="@+id/search_back"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_keyboard_backspace_black_36dp"
-            android:background="@color/searchtext"
+            android:src="@drawable/ic_keyboard_arrow_left_white_24dp"
+            android:background="@color/thema"
             android:layout_weight="0.1"
-            android:gravity="center"/>
+            android:gravity="center" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="지역검색"
             android:textSize="30sp"
-            android:layout_weight="0.9"
+            android:textColor="#ffffff"
+            android:layout_weight="0.8"
+            android:background="@color/thema"
             android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:background="@color/thema"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.1">
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/destination"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="관광지"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <Button
+            android:id="@+id/restaurant"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/restaurant"
             android:layout_weight="1"
             android:text="맛집"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/hotel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="숙박"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <Button
             android:id="@+id/ㅣeisure"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="레포츠"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ListView
