@@ -168,7 +168,8 @@
         android:layout_height="40dp"
         android:layout_weight="0.237"
         android:orientation="vertical"
-        android:onClick="true">
+        android:clickable="true"
+        android:onClick="TravelCourse">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -215,8 +216,9 @@
         android:layout_height="0dp"
         android:layout_weight="0.237"
         android:orientation="vertical"
-        android:onClick="true"
-        android:id="@+id/goparty">
+        android:id="@+id/goparty"
+        android:clickable="true"
+        android:onClick="GoParty">
 
         <LinearLayout
             android:layout_width="match_parent"
