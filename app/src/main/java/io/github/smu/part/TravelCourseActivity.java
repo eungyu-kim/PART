@@ -9,10 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,9 +52,11 @@ public class TravelCourseActivity extends AppCompatActivity {
     //받은정보 데이터 페이지 카운터
     int Contentcount=1, maxcount =0;
     //받는 정보 분류
-    int contentTypeId=25;
+    int contentTypeId=25, countValue = 0;
     //스피너 선언
     ArrayAdapter<CharSequence> adspin1;
+    //프로그레스 바 선언
+    ProgressBar travle_progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +74,9 @@ public class TravelCourseActivity extends AppCompatActivity {
         ImageButton TravelCourse_Back = (ImageButton)findViewById(R.id.travelcourse_back);
         Course_S_List = (ListView)findViewById(R.id.travelcourse_list);
         final Button Search_Btn = (Button)findViewById(R.id.travelcourse_search_btn);
+
+        //프로그레스 아이디 찾기
+        travle_progressBar = (ProgressBar)findViewById(R.id.travle_progressBar);
 
         final Spinner spin1 = (Spinner) findViewById(R.id.spinner_1);
         spin1.setPrompt("대분류 지역을 선택하세요.");
@@ -108,7 +115,7 @@ public class TravelCourseActivity extends AppCompatActivity {
             }
         });
         //리스트뷰 데이터 가져오기
-        getData(CreateURL());
+        getData(CreateURL(),1);
 
         //리스트뷰 바닥에 닿았을 때
         Course_S_List.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -122,9 +129,9 @@ public class TravelCourseActivity extends AppCompatActivity {
                     int count = adapter.getCount();
                     // 아이템 추가.
                     //items.add("LIST" + Integer.toString(count + 1));
-                    getData(CreateURL());
-                    // listview 갱신
-                    //adapter.notifyDataSetChanged();
+                    travle_progressBar.setVisibility(view.VISIBLE);
+                    getData(CreateURL(),2);
+                    travle_progressBar.setVisibility(view.GONE);
                 }
             }
 
@@ -134,11 +141,37 @@ public class TravelCourseActivity extends AppCompatActivity {
                 lastitemVisibleFlag = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
             }
         });
+
+        //리스트 뷰 클릭시 이벤트
+        Course_S_List.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // get item
+                //LocalListViewItem item = (LocalListViewItem) parent.getItemAtPosition(position) ;
+
+                Intent it = new Intent(TravelCourseActivity.this, TravelCourse_Detail.class);
+
+                //클릭 위치 출력
+                // Log.d("ListView","position:"+position);
+
+                //해쉬맵 가져오기
+                HashMap<String, String> DetailHash;
+                DetailHash = Course_S_ListHash.get(position);
+
+                //해쉬맵 넘기기
+                it.putExtra("DetailHash", DetailHash);
+                //다음 화면으로
+                startActivity(it);
+            }
+        }) ;
     }
-    public void getData(String url){
+    public void getData(String url, final int update){
+
         class GetDataJSON extends AsyncTask<String, Void, String> {
+            int updateValue;
             @Override
             protected String doInBackground(String... params) {
+                updateValue = update;
                 String uri = params[0];
                 BufferedReader bufferedReader = null;
                 try {
@@ -158,14 +191,14 @@ public class TravelCourseActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 travelcoursedata=result;
-                showList();
+                showList(updateValue);
             }
         }
         GetDataJSON g = new GetDataJSON();
         g.execute(url);
     }
 
-    protected void showList(){
+    protected void showList(int update){
         try {
             //전체 데이터 출력 travelcoursedata json으로 파싱 받은 데이터가 String 형식으로 되있다.
             Log.d("Result","travelcoursedata 전체데이터출력 : "+travelcoursedata);
@@ -185,10 +218,15 @@ public class TravelCourseActivity extends AppCompatActivity {
             Log.d("Result","items 결과"+items);
 
             //페이지 최대값
-            String numOfRows = Body.getString("numOfRows");
-            maxcount = Integer.parseInt(numOfRows);
-            if (Contentcount<maxcount)
+            String totalCount = Body.getString("totalCount");
+            Log.d("Result","totalCount 결과"+totalCount);
+            maxcount = Integer.parseInt(totalCount);
+            if (countValue<=maxcount)
                 Contentcount++;
+            if (countValue>=maxcount){
+                Toast.makeText(TravelCourseActivity.this, "마지막 목록입니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             JSONObject Item = new JSONObject(items);
             String item = Item.getString("item");
@@ -199,6 +237,7 @@ public class TravelCourseActivity extends AppCompatActivity {
 
             //JSONArray 길이만큼 반복
             for(int i=0;i<ItemArray.length();i++){
+                countValue++;
                 JSONObject c =ItemArray.getJSONObject(i);
                 String contentid = c.getString(Course_SID);
                 Log.d("Result","contentid 결과"+contentid);
@@ -222,8 +261,14 @@ public class TravelCourseActivity extends AppCompatActivity {
                 // 아이템 추가.
                 adapter.addItem(firstimage, title) ;
             }
-            //행사정보 어댑터 리스트 뷰에 달기
-            Course_S_List.setAdapter(adapter);
+            if (update == 1) {
+                //행사정보 어댑터 리스트 뷰에 달기
+                Course_S_List.setAdapter(adapter);
+            }
+            if (update == 2) {
+                 //listview 갱신
+                adapter.notifyDataSetChanged();
+            }
             //Log.d("Result","data 결과"+CreateURL());
         } catch (JSONException e) {
             e.printStackTrace();

@@ -270,7 +270,6 @@ public class PartyActivity extends AppCompatActivity {
             if (update == 2) {
                 adapter.notifyDataSetChanged();
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
