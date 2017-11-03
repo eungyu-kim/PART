@@ -96,6 +96,7 @@
             android:layout_height="match_parent">
         </ListView>
     </LinearLayout>
+
     <ProgressBar
         android:id="@+id/party_progressBar"
         android:layout_width="wrap_content"

@@ -46,6 +46,7 @@
         <activity android:name="io.github.smu.part.LeisureActivity"/>
         <activity android:name="io.github.smu.part.HotelActivity"/>
         <activity android:name="io.github.smu.part.PartyDataActivity"/>
+        <activity android:name=".TravelCourse_Detail"/>
 
     </application>
 
