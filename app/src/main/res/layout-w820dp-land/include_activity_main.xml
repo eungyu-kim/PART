@@ -14,14 +14,14 @@
         android:layout_height="match_parent"
         tools:ignore="UnusedAttribute">
 
-        <io.github.hidroh.calendar.widget.EventCalendarView
+        <io.github.smu.part.widget.EventCalendarView
             android:id="@id/calendar_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </FrameLayout>
 
-    <io.github.hidroh.calendar.widget.AgendaView
+    <io.github.smu.part.widget.AgendaView
         android:id="@id/agenda_view"
         android:layout_toRightOf="@id/calendar_view_container"
         android:layout_toEndOf="@id/calendar_view_container"

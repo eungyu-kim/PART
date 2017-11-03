@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="io.github.hidroh.calendar">
+    package="io.github.smu.part">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -17,35 +17,35 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/part_img"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:largeHeap="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name="io.github.smu.part.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TmapMain"/>
-        <activity android:name=".PartyActivity"/>
-        <activity android:name=".PlanActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".MyPage"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LocalSearchActivity"/>
-        <activity android:name=".EditActivity"
+        <activity android:name="io.github.smu.part.TmapMain"/>
+        <activity android:name="io.github.smu.part.PartyActivity"/>
+        <activity android:name="io.github.smu.part.PlanActivity"/>
+        <activity android:name="io.github.smu.part.LoginActivity"/>
+        <activity android:name="io.github.smu.part.MyPage"/>
+        <activity android:name="io.github.smu.part.RegisterActivity"/>
+        <activity android:name="io.github.smu.part.LocalSearchActivity"/>
+        <activity android:name="io.github.smu.part.EditActivity"
             android:windowSoftInputMode="adjustResize">
         </activity>
-        <activity android:name=".TravelCourseActivity"/>
-        <activity android:name=".DetailActivity"/>
-        <activity android:name=".FoodActivity"/>
-        <activity android:name=".LeisureActivity"/>
-        <activity android:name=".HotelActivity"/>
-        <activity android:name=".PartyDataActivity"/>
+        <activity android:name="io.github.smu.part.TravelCourseActivity"/>
+        <activity android:name="io.github.smu.part.DetailActivity"/>
+        <activity android:name="io.github.smu.part.FoodActivity"/>
+        <activity android:name="io.github.smu.part.LeisureActivity"/>
+        <activity android:name="io.github.smu.part.HotelActivity"/>
+        <activity android:name="io.github.smu.part.PartyDataActivity"/>
 
     </application>
 

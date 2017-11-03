@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/login_main3"
-    tools:context="io.github.hidroh.calendar.RegisterActivity">
+    tools:context="io.github.smu.part.RegisterActivity">
 
 
 

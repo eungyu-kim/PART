@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="io.github.hidroh.calendar.MainActivity">
+    tools:context="io.github.smu.part.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
