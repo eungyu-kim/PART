@@ -371,14 +371,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //행사정보 화면으로 이동
-        GoParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, PartyActivity.class);
-                startActivity(it);
-            }
-        });
 
 
 
@@ -403,16 +395,6 @@ public class MainActivity extends AppCompatActivity {
         Month1.setText(getTime(1));
         Month2.setText(getTime(1));
 
-        //여행 코스 화면으로 이동
-        TravelCourse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(MainActivity.this, TravelCourseActivity.class);
-                startActivity(it);
-                finish();
-            }
-        });
-
     }
 
     //파라미터에 따라 0일때 전체 일자 1일때 월 출력
@@ -425,5 +407,19 @@ public class MainActivity extends AppCompatActivity {
             return mFormat.format(mDate);
         else
             return "현재일자를 받지 못했습니다.";
+    }
+
+    //행사정보 화면으로 이동
+    public void GoParty(View v) {
+        Intent it = new Intent(MainActivity.this, PartyActivity.class);
+        startActivity(it);
+    }
+
+
+    //여행 코스 화면으로 이동
+    public void TravelCourse(View v) {
+        Intent it = new Intent(MainActivity.this, TravelCourseActivity.class);
+        startActivity(it);
+        finish();
     }
 }
