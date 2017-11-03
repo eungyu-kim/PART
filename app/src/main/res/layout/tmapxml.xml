@@ -14,27 +14,38 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_weight="0.08"
-            android:background="@color/thema"
-            android:paddingTop="10dp">
+            android:background="@color/thema">
             <ImageButton
                 android:id="@+id/tmap_back"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_keyboard_backspace_black_36dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_keyboard_arrow_left_white_24dp"
                 android:background="@color/thema"
-                android:gravity="center"/>
+                android:layout_weight="0.1"
+                android:gravity="center" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:src="@drawable/t_map"
+                android:layout_gravity="right"/>
+
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_gravity="center"
-                android:paddingTop="15dp"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:text="   T-map  길찾기"
-                android:textColor="#ffffff"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="길찾기"
+                android:textSize="37sp"
+                android:textColor="#ffffff"
+                android:layout_weight="0.4"
+                android:background="@color/thema"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:background="@color/thema"/>
         </LinearLayout>
 
 
