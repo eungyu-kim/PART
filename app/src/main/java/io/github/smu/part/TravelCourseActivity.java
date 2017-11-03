@@ -57,6 +57,8 @@ public class TravelCourseActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adspin1;
     //프로그레스 바 선언
     ProgressBar travle_progressBar;
+    //지역 코드
+    String areaCode = "";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,12 +93,16 @@ public class TravelCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int text1 = spin1.getSelectedItemPosition();
-                String areaCode = String.valueOf(text1);
-                Toast.makeText(TravelCourseActivity.this, "1"+text1, Toast.LENGTH_SHORT).show();
-                Intent it = new Intent(TravelCourseActivity.this, LocalSearchActivity.class);
-                it.putExtra("areaCode",areaCode);
-                startActivity(it);
-                finish();
+                areaCode = String.valueOf(text1);
+                int count ;
+                count = adapter.getCount() ;
+                Contentcount=1;
+                countValue = 0;
+                if (count > 0 && !areaCode.equals("0")) {
+                    // listview 데이터 삭제
+                    adapter.removeall();
+                    ;getData(CreateURL(),1);
+                }
             }
         });
 
@@ -278,7 +284,7 @@ public class TravelCourseActivity extends AppCompatActivity {
     protected String CreateURL() {
         String servicekey = "8F4FRvrVqxyBojiBd%2F7SGgGkxpeG6bUdOfq3MHZFGEvVCs2rr%2FB8QBNsjAnt4JyqUK0hHYbb64Or9bcma65Tgw%3D%3D";
         String first="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey="+servicekey;
-        String mid="&contentTypeId="+contentTypeId+"&areaCode=&sigunguCode=";
+        String mid="&contentTypeId="+contentTypeId+"&areaCode=" +areaCode+ "&sigunguCode=";
         String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;

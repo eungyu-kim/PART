@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.3">
         <ImageView
-            android:id="@+id/party_img"
+            android:id="@+id/travelcourse_img"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@color/blue50"
@@ -19,7 +19,8 @@
             android:id="@+id/travelcourse_detail_back"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:srcCompat="@drawable/ic_arrow_back_black_24dp"/>
+            android:background="#00000000"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_white_24dp"/>
     </FrameLayout>
 
 
@@ -52,7 +53,7 @@
                 android:layout_margin="3dp">
 
                 <TextView
-                    android:id="@+id/party_title"
+                    android:id="@+id/travelcourse_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
@@ -62,14 +63,6 @@
                     android:textStyle="bold"
                     android:layout_marginLeft="100dp"
                     android:layout_marginTop="15dp"/>
-                <TextView
-                    android:id="@+id/partyl_addr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:text="주소 : "
-                    android:textSize="16sp"
-                    android:layout_marginLeft="20dp"/>
 
             </LinearLayout>
 
@@ -105,75 +98,15 @@
                         android:textStyle="bold"
                         android:textSize="25sp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
-                        />
+                        android:layout_marginLeft="10dp" />
 
                     <TextView
-                        android:id="@+id/party_intro"
+                        android:id="@+id/travelcourse_intro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="15dp"
                         android:text="소개정보가 없습니다."
                         android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="행사 기간"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/thema"
-                        android:textStyle="bold"
-                        android:textSize="25sp" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/TextView_party_EventStart"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="15dp"
-                            android:text="행사 기간 정보가 없습니다."
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="15dp"
-                            android:text="~"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:id="@+id/TextView_party_EventEnd"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="15dp"
-                            android:text=""
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="행사 장소"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/thema"
-                        android:textStyle="bold"
-                        android:textSize="25sp" />
-
-                    <TextView
-                        android:id="@+id/TextView_party_eventplace"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="15dp"
-                        android:text="이벤트 장소 정보가 없습니다."
-                        android:textSize="15sp" />
-
 
                 </LinearLayout>
             </ScrollView>
