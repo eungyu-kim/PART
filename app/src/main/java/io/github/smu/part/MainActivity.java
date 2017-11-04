@@ -12,6 +12,7 @@ package io.github.smu.part;
         import android.widget.AdapterView;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.ImageButton;
         import android.widget.LinearLayout;
         import android.widget.Spinner;
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     // 검색 시, 선택된 메세지 띄우기 초기화
     String choice_main="";
     String choice_detail="";
+
+    ImageButton total_search_btn;
+    //통합검색 텍스트
+    EditText total_search_edit;
 
     public boolean onTouchEvent(MotionEvent touchevent){
         switch (flipper.getDisplayedChild()) {
@@ -81,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         final Spinner spin2 = (Spinner) findViewById(R.id.spinner_2);
         spin1.setPrompt("대분류 지역을 선택하세요.");
         Button btn_search = (Button) findViewById(R.id.main_search_btn);
-        LinearLayout TravelCourse =(LinearLayout)findViewById(R.id.travelcourse);
+
+
 
         //메인 카테고리 선택 (지역)
         adspin1 = ArrayAdapter.createFromResource(this, R.array.spinner_main, android.R.layout.simple_spinner_dropdown_item); // 첫번째 어댑터에 값 넣기
@@ -337,6 +343,8 @@ public class MainActivity extends AppCompatActivity {
         TextView Month2 = (TextView)findViewById(R.id.month2);
         final Button Search_Btn = (Button)findViewById(R.id.main_search_btn);
         TextView Title = (TextView) findViewById(R.id.title);
+        total_search_btn = (ImageButton)findViewById(R.id.total_search_btn);
+        total_search_edit = (EditText)findViewById(R.id.total_search_edit);
 
         // 타이틀글꼴 변경
         Typeface typeface = Typeface.createFromAsset(getAssets(), "NanumPen.ttf");
@@ -394,6 +402,22 @@ public class MainActivity extends AppCompatActivity {
         //현재 월 텍스트 출력
         Month1.setText(getTime(1));
         Month2.setText(getTime(1));
+
+        //통합 겅색 화면으로 이동
+        total_search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent Go_Search = new Intent(MainActivity.this, Total_Search.class);
+                if ( total_search_edit.getText().toString().length() == 0 ) {
+                    Toast.makeText(getApplicationContext(), "통합 검색창에 검색어를 입력하세요", Toast.LENGTH_LONG).show();
+                } else {
+                    String Search_Value = total_search_edit.getText().toString();
+                    Go_Search.putExtra("Search_Value",Search_Value);
+                    startActivity(Go_Search);
+                    finish();
+                }
+            }
+        });
 
     }
 

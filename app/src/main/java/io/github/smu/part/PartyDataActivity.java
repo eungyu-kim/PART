@@ -29,9 +29,9 @@ import java.util.HashMap;
 public class PartyDataActivity extends AppCompatActivity {
     //JSON에서 목록을 만들기위한 배열
     private static final String Detail_SID="contentid", Detail_Title = "title", Detail_address = "addr1", party_Image = "firstimage"
-            ,Overview = "overview",EventStart = "eventstartdate", EventEnd="eventenddate",Eventplace = "eventplace";
+            ,Overview = "overview",EventStart = "eventstartdate", EventEnd="eventenddate",Eventplace = "eventplace",Playtime = "playtime";
 
-    TextView Party_title, Party_addr, Party_intro, TextView_party_EventStart, TextView_party_EventEnd, TextView_party_eventplace;
+    TextView Party_title, Party_addr, Party_intro, TextView_party_eventplace,TextView_Playtime;
 
     String Party_contentId;
 
@@ -47,9 +47,8 @@ public class PartyDataActivity extends AppCompatActivity {
         Party_title = (TextView)findViewById(R.id.party_title) ;
         Party_addr = (TextView)findViewById(R.id.partyl_addr);
         Party_intro = (TextView)findViewById(R.id.party_intro);
-        TextView_party_EventStart = (TextView)findViewById(R.id.TextView_party_EventStart);
-        TextView_party_EventEnd = (TextView)findViewById(R.id.TextView_party_EventEnd);
         TextView_party_eventplace = (TextView)findViewById(R.id.TextView_party_eventplace);
+        TextView_Playtime = (TextView)findViewById(R.id.TextView_Playtime);
 
         //지역정보를 저장하기 위한
         Party_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -82,15 +81,6 @@ public class PartyDataActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(detail_img)
                 .into((ImageView)findViewById(R.id.party_img));
-
-        //행사기간 얻기
-        String EventStartValue = DetailHash.get(EventStart);
-        //Log.d("ListView","address:"+Food_addr);
-        TextView_party_EventStart.setText(EventStartValue);
-
-        String EventEndValue = DetailHash.get(EventEnd);
-        //Log.d("ListView","address:"+Food_addr);
-        TextView_party_EventEnd.setText(EventEndValue);
 
         getData(ParyIntroURL());
         IntroData(IntroURL());
@@ -242,6 +232,13 @@ public class PartyDataActivity extends AppCompatActivity {
             //Log.d("Result","Infocenter 결과"+EventplaceValue);
             if (!EventplaceValue.equals(""))
                 TextView_party_eventplace.setText(Html.fromHtml(EventplaceValue));
+
+            String PlaytimeValue = "행사 기간 정보가 없습니다.";
+            if(jsonvalue.has(Playtime))
+                PlaytimeValue = jsonvalue.getString(Playtime);
+            //Log.d("Result","Infocenter 결과"+PlaytimeValue);
+            if (!PlaytimeValue.equals(""))
+                TextView_Playtime.setText(Html.fromHtml(PlaytimeValue));
 
         } catch (JSONException e) {
             e.printStackTrace();
