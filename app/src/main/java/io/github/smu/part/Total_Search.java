@@ -220,8 +220,50 @@ public class Total_Search extends AppCompatActivity {
                     //다음 화면으로
                     startActivity(Party_it);
                 }
+
+                //문화 시설
+                if (ContenttypeidValue.equals("14")) {
+                    Intent Culture_it = new Intent(Total_Search.this, CultureActivity.class);
+
+                    //Log.d("ListView","position:"+contentTypeId);
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
+                    int contentTypeId = Integer.parseInt(ContenttypeidValue);
+                    //컨텐츠 ID 넣기
+                    Culture_it.putExtra("It_ContentTypeId", contentTypeId);
+
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Total_S_ListHash.get(position);
+
+                    //해쉬맵 넘기기
+                    Culture_it.putExtra("DetailHash", DetailHash);
+                    //다음 화면으로
+                    startActivity(Culture_it);
+                }
+
+                //쇼핑
+                if (ContenttypeidValue.equals("38")) {
+                    Intent shopping_it = new Intent(Total_Search.this, shoppingActivity.class);
+
+                    //Log.d("ListView","position:"+contentTypeId);
+                    //클릭 위치 출력력
+                    // Log.d("ListView","position:"+position);
+                    int contentTypeId = Integer.parseInt(ContenttypeidValue);
+                    //컨텐츠 ID 넣기
+                    shopping_it.putExtra("It_ContentTypeId", contentTypeId);
+
+                    //해쉬맵 가져오기
+                    HashMap<String, String> DetailHash;
+                    DetailHash = Total_S_ListHash.get(position);
+
+                    //해쉬맵 넘기기
+                    shopping_it.putExtra("DetailHash", DetailHash);
+                    //다음 화면으로
+                    startActivity(shopping_it);
+                }
             }
-        }) ;
+        });
 
 
     }

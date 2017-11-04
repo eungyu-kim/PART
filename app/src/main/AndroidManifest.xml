@@ -48,6 +48,8 @@
         <activity android:name="io.github.smu.part.PartyDataActivity"/>
         <activity android:name=".TravelCourse_Detail"/>
         <activity android:name=".Total_Search"/>
+        <activity android:name=".CultureActivity"/>
+        <activity android:name=".shoppingActivity"/>
 
     </application>
 
