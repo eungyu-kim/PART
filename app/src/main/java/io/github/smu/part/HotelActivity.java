@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,8 +59,7 @@ public class HotelActivity extends AppCompatActivity {
         TextView_Hotel_Roomtype = (TextView)findViewById(R.id.TextView_Hotel_Roomtype);
         TextView_checkintime = (TextView)findViewById(R.id.TextView_checkintime);
         TextView_checkouttime = (TextView)findViewById(R.id.TextView_checkouttime);
-
-
+        ImageButton hotel_back = (ImageButton)findViewById(R.id.hotel_detail_back);
 
 
         //지역정보를 저장하기 위한
@@ -100,6 +101,14 @@ public class HotelActivity extends AppCompatActivity {
 
         getData(FoodIntroURL());
         IntroData(IntroURL());
+
+        //뒤로가기
+        hotel_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url){

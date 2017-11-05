@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,6 +51,7 @@ public class PartyDataActivity extends AppCompatActivity {
         Party_intro = (TextView)findViewById(R.id.party_intro);
         TextView_party_eventplace = (TextView)findViewById(R.id.TextView_party_eventplace);
         TextView_Playtime = (TextView)findViewById(R.id.TextView_Playtime);
+        ImageButton party_back = (ImageButton)findViewById(R.id.partydata_detail_back);
 
         //지역정보를 저장하기 위한
         Party_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -84,6 +87,14 @@ public class PartyDataActivity extends AppCompatActivity {
 
         getData(ParyIntroURL());
         IntroData(IntroURL());
+
+        //뒤로가기
+        party_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url){

@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +61,7 @@ public class LeisureActivity extends AppCompatActivity {
         TextView_Restdateleports = (TextView)findViewById(R.id.TextView_Restdateleports);
         TextView_Usetimeleports = (TextView)findViewById(R.id.TextView_Usetimeleports);
         openperiod = (TextView)findViewById(R.id.openperiod);
+        ImageButton leisure_back = (ImageButton)findViewById(R.id.leisure_detail_back);
 
         //지역정보를 저장하기 위한
         leisure_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -99,6 +102,14 @@ public class LeisureActivity extends AppCompatActivity {
 
         getData(LeisueIntroURL());
         IntroData(IntroURL());
+
+        //뒤로가기
+        leisure_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url){

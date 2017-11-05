@@ -5,13 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/culture_img"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:srcCompat="@color/blue50"
-        android:scaleType="fitXY"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:id="@+id/culture_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@color/blue50"
+            android:scaleType="fitXY"
+            android:layout_weight="0.3"/>
+
+        <ImageButton
+            android:id="@+id/culture_detail_back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00000000"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +49,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.7"
                 android:orientation="vertical"
                 android:layout_margin="3dp">
 
@@ -46,10 +59,10 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.5"
                     android:text="제목"
-                    android:textSize="20sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/culture_addr"
                     android:layout_width="wrap_content"
@@ -88,11 +101,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="소개"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:text="소 개"
+                        android:textColor="@color/thema"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp" />
 
                     <TextView
                         android:id="@+id/culture_intro"
@@ -106,11 +120,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="문의 및 안내"
+                        android:text="행사 기간"
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
+                        android:textColor="@color/thema"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp" />
 
                     <TextView
                         android:id="@+id/TextView_culture_Infocenter"
@@ -128,7 +143,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_culture_parking"
@@ -146,7 +162,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_culture_Restdateleports"
@@ -164,7 +181,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_culture_Usetimeleports"

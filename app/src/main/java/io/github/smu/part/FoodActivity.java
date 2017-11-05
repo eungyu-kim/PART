@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -59,6 +61,7 @@ public class FoodActivity extends AppCompatActivity{
         TextView_food_restdatefood = (TextView)findViewById(R.id.food_restdatefood);
         TextView_firstmenu = (TextView)findViewById(R.id.TextView_firstmenu);
         TextView_Treatmenu = (TextView)findViewById(R.id.TextView_Treatmenu);
+        ImageButton food_back = (ImageButton)findViewById(R.id.food_detail_back);
 
 
         //지역정보를 저장하기 위한
@@ -101,6 +104,13 @@ public class FoodActivity extends AppCompatActivity{
         getData(FoodIntroURL());
         //소개 이외의 정보
         IntroData(IntroURL());
+
+        food_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url){

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,6 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView_Infocenter = (TextView)findViewById(R.id.TextView_Infocenter);
         TextView_parking = (TextView)findViewById(R.id.TextView_parking);
         TextView_Restdate = (TextView)findViewById(R.id.TextView_Restdate) ;
+        ImageButton back = (ImageButton)findViewById(R.id.listview_detail_back);
 
         //지역정보를 저장하기 위한
         Locla_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -93,6 +96,14 @@ public class DetailActivity extends AppCompatActivity {
         getData(CreateURL());
         //문의 및 안내 정보
         IntroData(IntroURL());
+
+        //뒤로 가기
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url){

@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +60,7 @@ public class CultureActivity extends AppCompatActivity {
         TextView_culture_parking = (TextView) findViewById(R.id.TextView_culture_parking);
         TextView_culture_Restdateleports = (TextView) findViewById(R.id.TextView_culture_Restdateleports);
         TextView_culture_Usetimeleports = (TextView) findViewById(R.id.TextView_culture_Usetimeleports);
+        ImageButton culture_back = (ImageButton)findViewById(R.id.culture_detail_back);
 
         //지역정보를 저장하기 위한
         culture_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -98,6 +101,13 @@ public class CultureActivity extends AppCompatActivity {
 
         getData(LeisueIntroURL());
         IntroData(IntroURL());
+
+        culture_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url) {

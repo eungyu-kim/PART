@@ -241,11 +241,13 @@ public class PartyActivity extends AppCompatActivity {
                 String addr1 = "주소가 없습니다.";
                 if(c.has(address))
                  addr1 = c.getString(address);
+                else continue;
                 //Log.d("Result","addr1 결과"+addr1);
                 String firstimage ="null";
                 //존재하지 않는경우 저장하지 않는다.
                 if(c.has(Image))
                     firstimage = c.getString(Image);
+                else continue;
                 //Log.d("Result","firstimage 결과"+firstimage);
                 String eventstartdate = c.getString(EventStart);
                 //Log.d("Result","eventstartdate 결과"+eventstartdate);

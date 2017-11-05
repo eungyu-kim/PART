@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,6 +59,7 @@ public class shoppingActivity extends AppCompatActivity {
         TextView_shopping_parking = (TextView) findViewById(R.id.TextView_shopping_parking);
         TextView_shopping_Restdateleports = (TextView) findViewById(R.id.TextView_shopping_Restdateleports);
         TextView_shopping_Usetimeleports = (TextView) findViewById(R.id.TextView_shopping_Usetimeleports);
+        ImageButton shopping_back = (ImageButton)findViewById(R.id.shopping_detail_back) ;
 
         //지역정보를 저장하기 위한
         shopping_S_ListHash = new ArrayList<HashMap<String, String>>();
@@ -97,6 +100,14 @@ public class shoppingActivity extends AppCompatActivity {
 
         getData(LeisueIntroURL());
         IntroData(IntroURL());
+
+        //뒤로가기
+        shopping_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void getData(String url) {

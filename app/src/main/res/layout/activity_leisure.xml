@@ -5,13 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/leisure_img"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:srcCompat="@color/blue50"
-        android:scaleType="fitXY"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.3">
+
+        <ImageView
+            android:id="@+id/leisure_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@color/blue50"
+            android:scaleType="fitXY"
+            android:layout_weight="0.3"/>
+
+        <ImageButton
+            android:id="@+id/leisure_detail_back"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#00000000"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"/>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,12 +57,12 @@
                     android:id="@+id/leisure_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.7"
                     android:text="제목"
-                    android:textSize="20sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/leisure_addr"
                     android:layout_width="wrap_content"
@@ -58,7 +71,6 @@
                     android:text="주소 : "
                     android:textSize="13sp"
                     android:layout_marginLeft="10dp"/>
-
             </LinearLayout>
 
             <ImageButton
@@ -92,7 +104,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/leisure_intro"
@@ -110,7 +123,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_leisure_Infocenter"
@@ -128,7 +142,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_leisure_parking"
@@ -146,7 +161,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_Restdateleports"
@@ -164,7 +180,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/TextView_Usetimeleports"
@@ -182,7 +199,8 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:textStyle="bold"
-                        android:textSize="20sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/thema"/>
 
                     <TextView
                         android:id="@+id/openperiod"
