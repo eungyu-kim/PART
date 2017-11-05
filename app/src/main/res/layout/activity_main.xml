@@ -9,8 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.09"
+        android:layout_height="50dp"
         android:background="@color/thema"
         android:orientation="vertical">
         <TextView
@@ -24,8 +23,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.06"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -61,203 +59,213 @@
             android:src="@drawable/ic_identity_18dp" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.139"
-        android:background="#ffffff"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/mainGray">
 
-            <Button
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:layout_weight="1"
-                android:text="           검색 : "/>
-
-            <EditText
-                android:id="@+id/total_search_edit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="검색어를 입력하세요"/>
-
-            <ImageButton
-                android:id="@+id/total_search_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                app:srcCompat="@drawable/ic_search_black_24dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <Spinner
-                android:id="@+id/spinner_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"/>
-
-            <Spinner
-                android:id="@+id/spinner_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/main_search_btn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="검 색"
-                android:textColor="#ffffff"
-                android:textSize="18dp"
-                android:background="@color/thema"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="20dp"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="17dp"
-        android:layout_weight="0.237"
-        android:layout_marginTop="7dp"
-        android:orientation="vertical">
-        <ViewFlipper
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viewFlipper">
-            <ImageView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/coupon"
-                android:id="@+id/main_imageview1"/>
-            <ImageView
+                android:background="#ffffff"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:background="@color/mainGray"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#ffffff"
+                        android:layout_weight="1"
+                        android:text="   통합검색 : "/>
+
+                    <EditText
+                        android:id="@+id/total_search_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:background="#ffffff"
+                        android:hint="검색어를 입력하세요"/>
+
+                    <ImageButton
+                        android:id="@+id/total_search_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="#ffffff"
+                        app:srcCompat="@drawable/ic_search_black_24dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <Spinner
+                        android:id="@+id/spinner_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"/>
+
+                    <Button
+                        android:id="@+id/main_search_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="검 색"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp"
+                        android:background="@color/thema"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="20dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/bus"
-                android:id="@+id/main_imageview2"/>
-            <ImageView
+                android:layout_height="175dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+                <ViewFlipper
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/viewFlipper">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/coupon"
+                        android:id="@+id/main_imageview1"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bus"
+                        android:id="@+id/main_imageview2"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/weather"
+                        android:id="@+id/main_imageview3"/>
+                </ViewFlipper>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/travelcourse"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/weather"
-                android:id="@+id/main_imageview3"/>
-        </ViewFlipper>
-    </LinearLayout>
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:clickable="true"
+                android:onClick="TravelCourse">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/month1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="몇"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#ff6347"/>
 
-    <LinearLayout
-        android:id="@+id/travelcourse"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_weight="0.237"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:onClick="TravelCourse">
+                    <TextView
+                        android:id="@+id/textView00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="월 추천 여행지"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="@color/thema" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_marginLeft="5dp"
-            android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:text="    + 자세히 보기"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@drawable/main_1" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/month1"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="몇"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:textColor="#ff6347"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:id="@+id/goparty"
+                android:clickable="true"
+                android:onClick="GoParty">
 
-            <TextView
-                android:id="@+id/textView00"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="월 추천 여행지"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:textColor="@color/thema" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="3dp"
-                android:text="    + 자세히 보기"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp">
+                    <TextView
+                        android:id="@+id/month2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="몇"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#ff6347"/>
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="월 행사정보"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="@color/thema"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:text="    + 자세히 보기"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@drawable/main_2" />
+            </LinearLayout>
         </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="@drawable/main_1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.237"
-        android:orientation="vertical"
-        android:id="@+id/goparty"
-        android:clickable="true"
-        android:onClick="GoParty">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_marginLeft="5dp">
-            <TextView
-                android:id="@+id/month2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="몇"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:textColor="#ff6347"/>
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="월 행사정보"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:textColor="@color/thema"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="3dp"
-                android:text="    + 자세히 보기"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:background="@drawable/main_2" />
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

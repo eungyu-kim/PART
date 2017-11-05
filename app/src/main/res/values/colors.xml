@@ -18,4 +18,6 @@
     <color name="colorWarning">#ED00CB</color>
     <color name="colorGray">#8C8C8C</color>
     <color name="back_ground">#FFF5EE</color>
+    <color name="mainGray">#f0f0f0</color>
+
 </resources>
