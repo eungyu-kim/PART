@@ -93,6 +93,9 @@ public class LocalSearchActivity extends AppCompatActivity {
         Intent it = getIntent();
         MainCategory = it.getStringExtra("areaCode");
         MiddleCategory = it.getStringExtra("sigunguCode");
+        Log.d("result","MainCategory"+MainCategory);
+        Log.d("result","MiddleCategory"+MiddleCategory);
+
         getData(CreateURL(MainCategory,MiddleCategory),1);
 
         //맛집 버튼을 눌렀을 때
@@ -104,12 +107,10 @@ public class LocalSearchActivity extends AppCompatActivity {
                 contentTypeId = 39;
                 Contentcount=1;
                 countValue = 0;
-                if (count > 0) {
-                        // listview 데이터 삭제
-                        adapter.removeall();
-                        getData(CreateURL(MainCategory,MiddleCategory),1);
-                        Locla_S_List.setAdapter(adapter);
-                }
+                // listview 데이터 삭제
+                adapter.removeall();
+                getData(CreateURL(MainCategory,MiddleCategory),1);
+                Locla_S_List.setAdapter(adapter);
             }
         });
 
@@ -117,17 +118,14 @@ public class LocalSearchActivity extends AppCompatActivity {
         Destination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int count ;
-                count = adapter.getCount() ;
                 contentTypeId =12;
                 Contentcount=1;
                 countValue = 0;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory),1);
-                    Locla_S_List.setAdapter(adapter);
-                }
+                // listview 데이터 삭제
+                adapter.removeall();
+                getData(CreateURL(MainCategory,MiddleCategory),1);
+                Locla_S_List.setAdapter(adapter);
+
             }
         });
 
@@ -140,12 +138,10 @@ public class LocalSearchActivity extends AppCompatActivity {
                 contentTypeId = 28;
                 Contentcount=1;
                 countValue = 0;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory),1);
-                    Locla_S_List.setAdapter(adapter);
-                }
+                // listview 데이터 삭제
+                adapter.removeall();
+                getData(CreateURL(MainCategory,MiddleCategory),1);
+                Locla_S_List.setAdapter(adapter);
             }
         });
 
@@ -158,12 +154,10 @@ public class LocalSearchActivity extends AppCompatActivity {
                 contentTypeId = 32;
                 Contentcount=1;
                 countValue = 0;
-                if (count > 0) {
-                    // listview 데이터 삭제
-                    adapter.removeall();
-                    getData(CreateURL(MainCategory,MiddleCategory),1);
-                    Locla_S_List.setAdapter(adapter);
-                }
+                // listview 데이터 삭제
+                adapter.removeall();
+                getData(CreateURL(MainCategory,MiddleCategory),1);
+                Locla_S_List.setAdapter(adapter);
             }
         });
 
@@ -343,6 +337,10 @@ public class LocalSearchActivity extends AppCompatActivity {
             Log.d("Result","totalCount 결과"+totalCount);
             Log.d("Result","countValue 결과"+countValue);
             maxcount = Integer.parseInt(totalCount);
+            if (maxcount==0) {
+                Toast.makeText(LocalSearchActivity.this, "정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (countValue<=maxcount)
                 Contentcount++;
             if (countValue>=maxcount){
@@ -354,77 +352,145 @@ public class LocalSearchActivity extends AppCompatActivity {
             String item = Item.getString("item");
             //Log.d("Result","item 결과"+item);
 
-            //JsonObject -> JSONArray 값 추출
-            JSONArray ItemArray = Item.getJSONArray("item");
+            String contentid;
+            String title = "제목이 없습니다.";
+            String addr1 = "주소가 없습니다.";
+            String firstimage ="null";
 
-            //JSONArray 길이만큼 반복
-            for(int i=0;i<ItemArray.length();i++){
-                countValue++;
-                JSONObject c =ItemArray.getJSONObject(i);
-                String contentid = c.getString(Locla_SID);
-                //Log.d("Result","contentid 결과"+contentid);
-                String title = "제목이 없습니다.";
-                if(c.has(Image))
-                    title = c.getString(Title);
-                else continue;
-                //Log.d("Result","PartyTitle 결과"+title);
-                String addr1 = "주소가 없습니다.";
-                if(c.has(address))
-                    addr1 = c.getString(address);
-                else continue;
-                //Log.d("Result","addr1 결과"+addr1);
-                String firstimage ="null";
+            if (maxcount==1) {
+                JSONObject oneitem = new JSONObject(item);
+                contentid = oneitem.getString(Locla_SID);
+                Log.d("Result","contentid 결과"+contentid);
+                if (oneitem.has(Image))
+                    title = oneitem.getString(Title);
+                else return;
+                if (oneitem.has(address))
+                    addr1 = oneitem.getString(address);
+                else return;
                 //존재하지 않는경우 저장하지 않는다.
-                if(c.has(Image))
-                    firstimage = c.getString(Image);
-                else continue;
-                //Log.d("Result","firstimage 결과"+firstimage);
-
-                HashMap<String,String> LocalHash = new HashMap<String,String>();
-                LocalHash.put(Locla_SID,contentid);
-                LocalHash.put(Title,title);
-                LocalHash.put(address,addr1);
-                LocalHash.put(Image,firstimage);
+                if (oneitem.has(Image))
+                    firstimage = oneitem.getString(Image);
+                else return;
+                Log.d("Result","firstimage 결과"+firstimage);
+                HashMap<String, String> LocalHash = new HashMap<String, String>();
+                LocalHash.put(Locla_SID, contentid);
+                LocalHash.put(Title, title);
+                LocalHash.put(address, addr1);
+                LocalHash.put(Image, firstimage);
                 Locla_S_ListHash.add(LocalHash);
                 if (contentTypeId == 39) {
                     //음식 정보를 저장하기 위한 해쉬 생성
                     HashMap<String, String> FoodHash = new HashMap<String, String>();
-                    FoodHash.put(Locla_SID,contentid);
-                    FoodHash.put(Title,title);
-                    FoodHash.put(address,addr1);
-                    FoodHash.put(Image,firstimage);
+                    FoodHash.put(Locla_SID, contentid);
+                    FoodHash.put(Title, title);
+                    FoodHash.put(address, addr1);
+                    FoodHash.put(Image, firstimage);
                     Food_S_ListHash.add(FoodHash);
                 }
 
                 if (contentTypeId == 32) {
                     //숙박 정보를 저장하기 위한 해쉬 생성
                     HashMap<String, String> HotelHash = new HashMap<String, String>();
-                    HotelHash.put(Locla_SID,contentid);
-                    HotelHash.put(Title,title);
-                    HotelHash.put(address,addr1);
-                    HotelHash.put(Image,firstimage);
+                    HotelHash.put(Locla_SID, contentid);
+                    HotelHash.put(Title, title);
+                    HotelHash.put(address, addr1);
+                    HotelHash.put(Image, firstimage);
                     Hotel_S_ListHash.add(HotelHash);
                 }
 
                 if (contentTypeId == 28) {
                     //레포츠 정보를 저장하기 위한 해쉬 생성
                     HashMap<String, String> Leisure = new HashMap<String, String>();
-                    Leisure.put(Locla_SID,contentid);
-                    Leisure.put(Title,title);
-                    Leisure.put(address,addr1);
-                    Leisure.put(Image,firstimage);
+                    Leisure.put(Locla_SID, contentid);
+                    Leisure.put(Title, title);
+                    Leisure.put(address, addr1);
+                    Leisure.put(Image, firstimage);
                     Leisure_S_ListHash.add(Leisure);
                 }
                 // 아이템 추가.
-                adapter.addItem(firstimage, title, addr1) ;
+                adapter.addItem(firstimage, title, addr1);
+                if (update == 1) {
+                    //행사정보 어댑터 리스트 뷰에 달기
+                    Locla_S_List.setAdapter(adapter);
+                    //Log.d("Result","data 결과"+CreateURL());
+                }
+                if (update == 2) {
+                    adapter.notifyDataSetChanged();
+                }
             }
-            if (update == 1) {
-                //행사정보 어댑터 리스트 뷰에 달기
-                Locla_S_List.setAdapter(adapter);
-                //Log.d("Result","data 결과"+CreateURL());
-            }
-            if (update == 2) {
-                adapter.notifyDataSetChanged();
+            else {
+                //JsonObject -> JSONArray 값 추출
+                JSONArray ItemArray = Item.getJSONArray("item");
+
+                //JSONArray 길이만큼 반복
+                for (int i = 0; i < ItemArray.length(); i++) {
+                    countValue++;
+                    JSONObject c = ItemArray.getJSONObject(i);
+                    contentid = c.getString(Locla_SID);
+                    //Log.d("Result","contentid 결과"+contentid);
+
+                    if (c.has(Image))
+                        title = c.getString(Title);
+                    else continue;
+                    //Log.d("Result","PartyTitle 결과"+title);
+
+                    if (c.has(address))
+                        addr1 = c.getString(address);
+                    else continue;
+                    //Log.d("Result","addr1 결과"+addr1);
+
+                    //존재하지 않는경우 저장하지 않는다.
+                    if (c.has(Image))
+                        firstimage = c.getString(Image);
+                    else continue;
+                    //Log.d("Result","firstimage 결과"+firstimage);
+
+                    HashMap<String, String> LocalHash = new HashMap<String, String>();
+                    LocalHash.put(Locla_SID, contentid);
+                    LocalHash.put(Title, title);
+                    LocalHash.put(address, addr1);
+                    LocalHash.put(Image, firstimage);
+                    Locla_S_ListHash.add(LocalHash);
+                    if (contentTypeId == 39) {
+                        //음식 정보를 저장하기 위한 해쉬 생성
+                        HashMap<String, String> FoodHash = new HashMap<String, String>();
+                        FoodHash.put(Locla_SID, contentid);
+                        FoodHash.put(Title, title);
+                        FoodHash.put(address, addr1);
+                        FoodHash.put(Image, firstimage);
+                        Food_S_ListHash.add(FoodHash);
+                    }
+
+                    if (contentTypeId == 32) {
+                        //숙박 정보를 저장하기 위한 해쉬 생성
+                        HashMap<String, String> HotelHash = new HashMap<String, String>();
+                        HotelHash.put(Locla_SID, contentid);
+                        HotelHash.put(Title, title);
+                        HotelHash.put(address, addr1);
+                        HotelHash.put(Image, firstimage);
+                        Hotel_S_ListHash.add(HotelHash);
+                    }
+
+                    if (contentTypeId == 28) {
+                        //레포츠 정보를 저장하기 위한 해쉬 생성
+                        HashMap<String, String> Leisure = new HashMap<String, String>();
+                        Leisure.put(Locla_SID, contentid);
+                        Leisure.put(Title, title);
+                        Leisure.put(address, addr1);
+                        Leisure.put(Image, firstimage);
+                        Leisure_S_ListHash.add(Leisure);
+                    }
+                    // 아이템 추가.
+                    adapter.addItem(firstimage, title, addr1);
+                }
+                if (update == 1) {
+                    //행사정보 어댑터 리스트 뷰에 달기
+                    Locla_S_List.setAdapter(adapter);
+                    //Log.d("Result","data 결과"+CreateURL());
+                }
+                if (update == 2) {
+                    adapter.notifyDataSetChanged();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -387,6 +387,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int text1 = spin1.getSelectedItemPosition();
+                //세종8 -> 경기도 31
+                if (text1>8) {
+                    text1+=22;
+                }
                 String areaCode = String.valueOf(text1);
                 int text2 = spin2.getSelectedItemPosition();
                 String sigunguCode = String.valueOf(text2);
