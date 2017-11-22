@@ -517,4 +517,12 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
         map.setLineWidth(2);
         m_tmapView.addTMapPolyLine("path",map);
     }
+
+    // 뒤로가기 버튼을 터치할 때
+    @Override
+    public void onBackPressed(){
+        Intent it = new Intent(TmapMain.this, MainActivity.class);
+        startActivity(it);
+        finish();
+    }
 }
