@@ -349,7 +349,7 @@ public class TmapMain extends AppCompatActivity implements View.OnClickListener 
     private void OdsayAPi(Double startlat, Double startlng, Double endlat, Double endlng, int i) {
         subwayType = i; // 이동방법 1 지하철/ /
         ODsayService odsayService;
-        odsayService = ODsayService.init(getApplicationContext(), "5Vq83w/lRS6BYBFCS/QM77UFYnTlqRyHkJGe87dbalw");
+        odsayService = ODsayService.init(getApplicationContext(), "tSGbOG1EHMXcSqijWDeoxujmzI1/QiadmVj3CGFY40Y");
         odsayService.setReadTimeout(3000);
         odsayService.setConnectionTimeout(3000);
 // 서버 통신
