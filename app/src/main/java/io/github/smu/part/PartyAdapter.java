@@ -45,6 +45,7 @@ public class PartyAdapter extends BaseAdapter {
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView iconImageView = (ImageView) convertView.findViewById(R.id.partyimg) ;
+        ImageView imagebg = (ImageView) convertView.findViewById(R.id.bg) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.partytitle) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.partyaddress) ;
         TextView statTextView = (TextView) convertView.findViewById(R.id.partystart) ;
@@ -55,6 +56,7 @@ public class PartyAdapter extends BaseAdapter {
 
         // 아이템 내 각 위젯에 데이터 반영, 피카소 이용해 url 주소 이미지 넣기
         Picasso.with(context).load(listViewItem.getIcon()).into(iconImageView);
+        Picasso.with(context).load(listViewItem.getIcon()).into(imagebg);
         titleTextView.setText(listViewItem.getTitle());
         descTextView.setText(listViewItem.getDesc());
         statTextView.setText(listViewItem.getStart());
