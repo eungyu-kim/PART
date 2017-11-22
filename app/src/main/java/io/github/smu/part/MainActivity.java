@@ -1,29 +1,32 @@
 package io.github.smu.part;
 
-        import android.app.Activity;
-        import android.content.Intent;
-        import android.graphics.Typeface;
-        import android.net.Uri;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.MotionEvent;
-        import android.view.View;
-        import android.view.animation.AnimationUtils;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.ImageButton;
-        import android.widget.LinearLayout;
-        import android.widget.Spinner;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import android.widget.ViewFlipper;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ViewFlipper;
 
-        import java.text.SimpleDateFormat;
-        import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    // 마지막으로 뒤로가기 버튼이 터치된 시간
+    private long lastTimeBackPressed;
 
     // viewflipper 이미지 자동 슬라이드 설정
     final Activity activity = this;
@@ -52,18 +55,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onTouchEvent(MotionEvent touchevent){
         switch (flipper.getDisplayedChild()) {
             case 0:
-                Intent intent = new Intent(
-                        Intent.ACTION_VIEW, Uri.parse("https://fall.visitkorea.or.kr/theme/coupon.do"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://fall.visitkorea.or.kr/theme/coupon.do"));
                 startActivity(intent);
                 break;
             case 1:
-                Intent intent1 = new Intent(
-                        Intent.ACTION_VIEW, Uri.parse("https://txbus.t-money.co.kr/main.do"));
+                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://txbus.t-money.co.kr/main.do"));
                 startActivity(intent1);
                 break;
             case 2:
-                Intent intent2 = new Intent(
-                        Intent.ACTION_VIEW, Uri.parse("http://www.kma.go.kr/weather/forecast/timeseries.jsp"));
+                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.kma.go.kr/weather/forecast/timeseries.jsp"));
                 startActivity(intent2);
                 break;
         }
@@ -357,6 +357,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, PlanActivity.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -366,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent it = new Intent(MainActivity.this, TmapMain.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -407,14 +409,15 @@ public class MainActivity extends AppCompatActivity {
         Month1.setText(getTime(1));
         Month2.setText(getTime(1));
 
-        //통합 겅색 화면으로 이동
+        //통합 검색 화면으로 이동
         total_search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent Go_Search = new Intent(MainActivity.this, Total_Search.class);
                 if ( total_search_edit.getText().toString().length() == 0 ) {
                     Toast.makeText(getApplicationContext(), "통합 검색창에 검색어를 입력하세요", Toast.LENGTH_LONG).show();
-                } else {
+                }
+                else {
                     String Search_Value = total_search_edit.getText().toString();
                     Go_Search.putExtra("Search_Value",Search_Value);
                     startActivity(Go_Search);
@@ -441,13 +444,26 @@ public class MainActivity extends AppCompatActivity {
     public void GoParty(View v) {
         Intent it = new Intent(MainActivity.this, PartyActivity.class);
         startActivity(it);
+        finish();
     }
-
 
     //여행 코스 화면으로 이동
     public void TravelCourse(View v) {
         Intent it = new Intent(MainActivity.this, TravelCourseActivity.class);
         startActivity(it);
         finish();
+    }
+
+    @Override
+    public void onBackPressed(){
+        // 1.5초 이내에 뒤로가기 버튼을 또 터치했으면 앱을 종료한다.
+        if (System.currentTimeMillis() - lastTimeBackPressed < 1500){
+            finish();
+            return;
+        }
+
+        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+
+        lastTimeBackPressed = System.currentTimeMillis();
     }
 }

@@ -101,7 +101,7 @@ public class TravelCourseActivity extends AppCompatActivity {
                 if (count > 0 && !areaCode.equals("0")) {
                     // listview 데이터 삭제
                     adapter.removeall();
-                    ;getData(CreateURL(),1);
+                    getData(CreateURL(),1);
                 }
             }
         });
@@ -112,10 +112,11 @@ public class TravelCourseActivity extends AppCompatActivity {
         //지역 정보를 커스텀  listView와 연결하기 위한 어뎁터
         adapter = new TravelCourseListViewAdapter();
 
+        // 뒤로가기버튼 누를시
         TravelCourse_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(TravelCourseActivity.this,MainActivity.class);
+                Intent it = new Intent(TravelCourseActivity.this, MainActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -288,5 +289,13 @@ public class TravelCourseActivity extends AppCompatActivity {
         String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=15&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
+    }
+
+    // 뒤로가기 버튼을 터치할 때
+    @Override
+    public void onBackPressed(){
+        Intent it = new Intent(TravelCourseActivity.this, MainActivity.class);
+        startActivity(it);
+        finish();
     }
 }

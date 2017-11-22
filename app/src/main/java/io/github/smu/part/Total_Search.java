@@ -399,4 +399,12 @@ public class Total_Search extends AppCompatActivity {
         String data  = first  + mid  + last;
         return data;
     }
+
+    // 뒤로가기 버튼을 터치할 때
+    @Override
+    public void onBackPressed(){
+        Intent it = new Intent(Total_Search.this, MainActivity.class);
+        startActivity(it);
+        finish();
+    }
 }

@@ -368,4 +368,12 @@ public class PlanActivity extends AppCompatActivity {
             mAdapter.bindEvents((Long) cookie, cursor);
         }
     }
+
+    // 뒤로가기 버튼을 터치할 때
+    @Override
+    public void onBackPressed(){
+        Intent it = new Intent(PlanActivity.this, MainActivity.class);
+        startActivity(it);
+        finish();
+    }
 }

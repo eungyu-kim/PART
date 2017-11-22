@@ -85,6 +85,7 @@ public class PartyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent it = new Intent(PartyActivity.this,MainActivity.class);
                 startActivity(it);
+                finish();
             }
         });
 
@@ -284,5 +285,13 @@ public class PartyActivity extends AppCompatActivity {
         String last="&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+Contentcount+"&_type=json";
         String data  = first  + mid  + last;
         return data;
+    }
+
+    // 뒤로가기 버튼을 터치할 때
+    @Override
+    public void onBackPressed(){
+        Intent it = new Intent(PartyActivity.this, MainActivity.class);
+        startActivity(it);
+        finish();
     }
 }
