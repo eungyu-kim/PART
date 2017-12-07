@@ -375,9 +375,9 @@ public class MainActivity extends AppCompatActivity {
         GoMypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent it = new Intent(MainActivity.this, LoginActivity.class);
-                //startActivity(it);
-                Toast.makeText(MainActivity.this, "준비중입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.google.vr.sdk.samples.simplevideowidget");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
